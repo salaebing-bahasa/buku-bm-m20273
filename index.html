@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Buku teks Bahasa Melayu 1 untuk murid Tingkatan 1, Semester 2. Dwibahasa Melayu dan Thai.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Buku Teks Bahasa Melayu 1</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=Sarabun:wght@400;600;700&family=Noto+Naskh+Arabic:wght@500;700&display=swap">
+<style>
+/* Layout: lembaran buku bertingkat di atas meja; satu lembaran = satu halaman buku, boleh skrol berterusan */
+:root{
+  --desk:#E6EAE5; --paper:#FFFEFA; --ink:#1B2620; --muted:#5A6A61; --rule:#D8DFD7;
+  --green:#1F5D40; --green-tint:#EDF4EF; --gold:#9A6F06; --gold-line:#B8860B; --gold-tint:#FBF4E2;
+  --on-green:#FFFEFA; --shadow:0 1px 2px rgba(27,38,32,.08),0 8px 28px rgba(27,38,32,.10);
+  --f-ms:"Literata",Georgia,"Times New Roman",serif;
+  --f-th:"Sarabun","Leelawadee UI","Tahoma",sans-serif;
+  --f-jawi:"Noto Naskh Arabic","Traditional Arabic","Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --desk:#0F1512; --paper:#19211D; --ink:#E5ECE7; --muted:#9BAAA1; --rule:#2D3832;
+  --green:#86C9A5; --green-tint:#1F2D27; --gold:#E2B850; --gold-line:#C89B2E; --gold-tint:#2A2517;
+  --on-green:#0F1512; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark }}
+:root[data-theme="dark"]{
+  --desk:#0F1512; --paper:#19211D; --ink:#E5ECE7; --muted:#9BAAA1; --rule:#2D3832;
+  --green:#86C9A5; --green-tint:#1F2D27; --gold:#E2B850; --gold-line:#C89B2E; --gold-tint:#2A2517;
+  --on-green:#0F1512; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--desk);color:var(--ink);font-family:var(--f-th);font-size:17px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--green)}
+a{color:var(--green)}
+:focus-visible{outline:2px solid var(--gold-line);outline-offset:2px}
+
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));
+  background:var(--green);color:var(--on-green);padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar-in{max-width:860px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.bar b{font-family:var(--f-ms);font-weight:600;font-size:15px;flex:1;min-width:0}
+.bar a{color:var(--on-green);font-size:14px;text-decoration:none;border:1px solid currentColor;border-radius:999px;padding:3px 12px;opacity:.9}
+.bar a:hover{opacity:1}
+
+.book{max-width:860px;margin:24px auto 0;display:flex;flex-direction:column;gap:28px}
+.sheet{background:var(--paper);box-shadow:var(--shadow);border-radius:3px;padding:clamp(22px,5vw,56px) clamp(18px,6vw,64px) 28px;position:relative;min-width:0;scroll-margin-top:64px}
+.folio{margin-top:36px;padding-top:10px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.folio span:first-child{font-family:var(--f-ms);font-style:italic}
+
+/* bilingual lines */
+.ms{font-family:var(--f-ms);margin:0}
+.th{font-family:var(--f-th);margin:0;color:var(--muted);font-size:.94em}
+.bi{display:flex;flex-direction:column;gap:1px}
+.bi + .bi{margin-top:10px}
+.jawi{font-family:var(--f-jawi);direction:rtl;unicode-bidi:isolate}
+
+h2,h3{text-wrap:balance;margin:0}
+.eyebrow{font-family:var(--f-ms);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);display:flex;flex-direction:column}
+.eyebrow .th{letter-spacing:0;text-transform:none;font-size:13px;color:var(--gold)}
+.ltitle{margin-top:10px;padding-bottom:18px;border-bottom:2px solid var(--green)}
+.ltitle .ms{font-size:clamp(28px,5vw,38px);font-weight:700;line-height:1.2;color:var(--green)}
+.ltitle .th{font-size:20px;margin-top:4px;color:var(--ink)}
+.sec{margin-top:30px}
+.sec > .bi:first-child .ms{font-size:20px;font-weight:600;color:var(--green)}
+.sec > .bi:first-child .th{font-size:15px}
+.sec > * + *{margin-top:14px}
+
+.box{border:1px solid var(--rule);border-radius:6px;padding:16px 18px;background:var(--green-tint)}
+.box .label{font-family:var(--f-ms);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--green)}
+.box .label .th{text-transform:none;letter-spacing:0;font-weight:600;font-size:14px;color:var(--green)}
+.box ul{margin:10px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.note{background:var(--gold-tint);border-color:var(--gold-line)}
+.note .label,.note .label .th{color:var(--gold)}
+.nilai{margin-top:30px;border:none;border-left:4px solid var(--gold-line);border-radius:0 6px 6px 0;background:var(--gold-tint)}
+.nilai .label,.nilai .label .th{color:var(--gold)}
+.nilai .ms{font-style:italic}
+
+.tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:16px}
+th,td{padding:8px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule)}
+tr:last-child td{border-bottom:none}
+thead th{background:var(--green);color:var(--on-green);font-family:var(--f-ms);font-weight:600;font-size:14px;white-space:nowrap}
+thead th small{display:block;font-family:var(--f-th);font-weight:400;opacity:.85}
+td.n{width:3em;color:var(--muted);font-variant-numeric:tabular-nums}
+td.mscell{font-family:var(--f-ms);font-weight:600}
+td.thcell{color:var(--muted)}
+td.msplain{font-family:var(--f-ms)}
+.ms .jawi{font-size:1.3em}
+td .jawi{font-size:22px;line-height:1.4}
+tbody tr:nth-child(even){background:color-mix(in srgb,var(--green-tint) 55%,transparent)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.grid div{border:1px solid var(--rule);border-radius:6px;padding:8px 10px;display:flex;align-items:baseline;gap:10px}
+.grid b{font-variant-numeric:tabular-nums;color:var(--green);font-size:20px;min-width:1.6em}
+.grid span{font-family:var(--f-ms)}
+.jgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:6px;direction:rtl}
+.jgrid div{border:1px solid var(--rule);border-radius:6px;padding:6px 4px 4px;text-align:center;direction:ltr}
+.jgrid .jawi{display:block;font-size:30px;line-height:1.3;color:var(--green)}
+.jgrid small{font-family:var(--f-ms);font-size:13px;color:var(--muted)}
+
+.dialog{display:flex;flex-direction:column;gap:10px}
+.dl{display:grid;grid-template-columns:7.5em 1fr;gap:12px}
+.dl .who{font-family:var(--f-ms);font-weight:600;color:var(--green);text-align:right}
+@media (max-width:520px){.dl{grid-template-columns:1fr;gap:0}.dl .who{text-align:left}}
+
+.reading{border:1px solid var(--rule);border-radius:6px;padding:18px 20px}
+.reading h4{margin:0 0 10px;font-family:var(--f-ms);font-size:19px;text-align:center;color:var(--green)}
+.poem{padding:16px 20px;border:1px solid var(--rule);border-radius:6px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.poem .ms{font-style:italic;font-size:18px}
+
+ol.steps{margin:0;padding-left:24px;display:flex;flex-direction:column;gap:10px}
+ul.check{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+ul.check li{display:grid;grid-template-columns:22px 1fr;gap:10px}
+ul.check li::before{content:"";width:18px;height:18px;margin-top:4px;border:2px solid var(--green);border-radius:4px}
+
+.lat{counter-reset:q;display:flex;flex-direction:column;gap:18px}
+.q{display:grid;grid-template-columns:2em 1fr;gap:4px 8px}
+.q > .num{font-family:var(--f-ms);font-weight:700;color:var(--green);font-size:18px}
+.q .items{grid-column:2;display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.q .items .ms{white-space:pre-wrap;overflow-wrap:anywhere}
+
+.pdf{position:absolute;top:18px;right:18px;font:inherit;font-size:13px;background:var(--paper);color:var(--green);border:1px solid var(--green);border-radius:999px;padding:4px 12px;cursor:pointer;line-height:1.3;text-align:center}
+.pdf:hover{background:var(--green-tint)}
+.pdf span{display:block}
+
+/* cover */
+.cover{text-align:center;padding-block:clamp(40px,9vw,90px);background:
+  linear-gradient(var(--paper),var(--paper)) padding-box;border-top:10px solid var(--green)}
+.cover .jawi{font-size:clamp(28px,6vw,40px);color:var(--gold);display:block;margin-top:8px}
+.cover h1{font-family:var(--f-ms);font-size:clamp(34px,7vw,56px);line-height:1.1;color:var(--green);margin:0;text-wrap:balance}
+.cover .sub{font-size:22px;color:var(--ink);margin-top:6px}
+.cover .rule{width:120px;height:2px;background:var(--gold-line);margin:28px auto}
+.cover .meta{display:flex;flex-direction:column;gap:14px;align-items:center}
+.cover .by{margin-top:36px}
+.cover .by .ms{font-weight:600}
+
+.toc{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:22px}
+.toc h3 .ms{font-size:19px;color:var(--green)}
+.toc ol{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column}
+.toc ol li a{display:grid;grid-template-columns:2.4em 1fr auto;gap:8px;padding:8px 0;border-bottom:1px dotted var(--rule);text-decoration:none;color:var(--ink)}
+.toc .no{font-family:var(--f-ms);color:var(--gold);font-variant-numeric:tabular-nums}
+.toc .pg{color:var(--muted);font-variant-numeric:tabular-nums;font-size:14px}
+
+.unitsheet{display:flex;flex-direction:column;justify-content:center;min-height:min(420px,70vh);background:var(--green);color:var(--on-green)}
+.unitsheet .ms,.unitsheet .th{color:var(--on-green)}
+.unitsheet .big{font-family:var(--f-ms);font-size:clamp(64px,14vw,120px);line-height:1;font-weight:700;opacity:.3}
+.unitsheet h2 .ms{font-size:clamp(30px,6vw,46px)}
+.unitsheet h2 .th{font-size:22px;opacity:.9}
+.unitsheet .folio{border-color:color-mix(in srgb,var(--on-green) 30%,transparent);color:var(--on-green);opacity:.8}
+
+.refs{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+.refs li{padding-left:2em;text-indent:-2em;overflow-wrap:anywhere}
+
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+@media print{
+  body{background:#fff;padding:0}
+  body::before,.bar,.pdf{display:none!important}
+  .book{margin:0;gap:0;max-width:none}
+  .sheet{box-shadow:none;border-radius:0;page-break-after:always}
+  body.print-one .sheet:not(.print-target){display:none}
+}
+</style>
+</head>
+<body>
+
+
+<header class="bar"><div class="bar-in">
+  <b>Buku Teks Bahasa Melayu 1</b>
+  <a href="#kandungan">Kandungan · สารบัญ</a>
+</div></header>
+<main class="book" id="book"></main>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  const B = window.BUKU;
+  const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  const isThai = s => /[฀-๿]/.test(s);
+  const msx = s => esc(s).replace(/([\u0600-\u06FF\u0750-\u077F]+)/g,'<bdi class="jawi" lang="ms-Arab">$1</bdi>');
+  const bi = (ms, th, tag="p") => `<div class="bi">${ms?`<${tag} class="ms">${msx(ms)}</${tag}>`:""}${th?`<${tag} class="th">${esc(th)}</${tag}>`:""}</div>`;
+  const hd = (ms, th) => `<th>${esc(ms)}<small>${esc(th)}</small></th>`;
+  const inIframe = (()=>{ try { return window.self !== window.top } catch(e){ return true } })();
+  let page = 0;
+  const folio = (ms) => `<footer class="folio"><span>${esc(ms)}</span><span>${++page}</span></footer>`;
+  const out = [];
+
+  /* cover */
+  out.push(`<section class="sheet cover" id="kulit">
+    <div class="meta">
+      ${bi("Buku Teks Bahasa Melayu 1","หนังสือเรียนภาษามลายู 1")}
+    </div>
+    <span class="jawi" lang="ms-Arab">بوکو تيکس بهاس ملايو</span>
+    <div class="rule"></div>
+    <h1>Bahasa Melayu 1</h1>
+    <p class="th sub">รายวิชา ม20273 ภาษาที่ 2 (ภาษามลายู 1)</p>
+    <div class="rule"></div>
+    <div class="meta">
+      ${bi("Tingkatan 1 · Semester 2 · 40 jam · 1.0 kredit","ชั้นมัธยมศึกษาปีที่ 1 ภาคเรียนที่ 2 · 40 ชั่วโมง · 1.0 หน่วยกิต")}
+      ${bi("Bidang Pembelajaran Bahasa Asing","กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ")}
+      ${bi("Sekolah Hatyaiwittayalai Somboonkulkanya, Songkhla","โรงเรียนหาดใหญ่วิทยาลัยสมบูรณ์กุลกันยา จังหวัดสงขลา")}
+    </div>
+    <div class="meta by">
+      ${bi("Disusun oleh","เรียบเรียงโดย")}
+      ${bi("Asst. Prof. Muhammad Salaebing","ผศ.มูหำหมัด สาแลบิง")}
+      ${bi("Program Bahasa Melayu, Fakulti Kemanusiaan dan Sains Sosial, Universiti Thaksin","สาขาวิชาภาษามลายู คณะมนุษยศาสตร์และสังคมศาสตร์ มหาวิทยาลัยทักษิณ")}
+    </div>
+  </section>`);
+
+  /* prakata */
+  out.push(`<section class="sheet" id="prakata">
+    <div class="ltitle">${bi("Prakata","คำนำ","h2")}</div>
+    <div class="sec">
+      ${bi("Buku ini disediakan untuk murid Tingkatan 1, Semester 2, yang mempelajari bahasa Melayu sebagai bahasa kedua. Kandungannya mengikut huraian kursus dan struktur kursus sekolah.",
+           "หนังสือเล่มนี้จัดทำขึ้นสำหรับนักเรียนชั้นมัธยมศึกษาปีที่ 1 ภาคเรียนที่ 2 ที่เรียนภาษามลายูเป็นภาษาที่สอง เนื้อหาเป็นไปตามคำอธิบายรายวิชาและโครงสร้างรายวิชาของโรงเรียน")}
+      ${bi("Buku ini mempunyai 4 unit dan 20 pelajaran: Asas Komunikasi, Sekitar Saya, Aktiviti dan Rutin, serta Budaya dan Loghat. Setiap pelajaran mengandungi objektif, kosa kata, dialog atau bacaan, pola ayat, latihan dan nilai murni.",
+           "หนังสือแบ่งเป็น 4 หน่วย 20 บท ได้แก่ พื้นฐานการสื่อสาร รอบตัวฉัน กิจกรรมและชีวิตประจำวัน และวัฒนธรรมและภาษาถิ่น ทุกบทมีจุดประสงค์ คำศัพท์ บทสนทนาหรือบทอ่าน รูปประโยค แบบฝึกหัด และข้อคิด")}
+      ${bi("Bahasa dalam buku ini ialah bahasa Melayu standard. Glosari, jawapan latihan dan rujukan terdapat di bahagian akhir buku.",
+           "ภาษาที่ใช้ในหนังสือเล่มนี้เป็นภาษามลายูมาตรฐาน ท้ายเล่มมีอภิธานศัพท์ เฉลยแบบฝึกหัด และบรรณานุกรม")}
+      ${bi("Asst. Prof. Muhammad Salaebing","ผศ.มูหำหมัด สาแลบิง")}
+    </div>
+    ${folio("Prakata")}
+  </section>`);
+
+  /* hasil pembelajaran */
+  out.push(`<section class="sheet" id="hasil">
+    <div class="ltitle">${bi("Hasil Pembelajaran","ผลการเรียนรู้","h2")}</div>
+    <div class="sec">
+      ${bi("Selepas mempelajari buku ini, murid dapat:","เมื่อเรียนจบหนังสือเล่มนี้ ผู้เรียนสามารถ")}
+      <div class="tbl"><table><thead><tr>${hd("Bil.","ข้อ")}${hd("Hasil pembelajaran","ผลการเรียนรู้")}${hd("Unit","หน่วย")}</tr></thead><tbody>
+      ${B.hasil.map((h,i)=>{
+        const units = B.units.filter(u=>{const [a,b]=u.hp.split("–").map(Number);return i+1>=a&&i+1<=b}).map(u=>u.no).join(", ");
+        return `<tr><td class="n">${i+1}</td><td>${bi(h[0],h[1])}</td><td class="n">${units}</td></tr>`;}).join("")}
+      </tbody></table></div>
+    </div>
+    ${folio("Hasil Pembelajaran")}
+  </section>`);
+
+  /* kandungan: pages computed after layout counting */
+  const tocIndex = out.length; out.push("");
+  page++; // kandungan page number reserved
+  const tocPage = page;
+
+  const lessonPage = {};
+  const lessonsByUnit = u => B.lessons.filter(l=>l.unit===u.no);
+  let pelNo = 0;
+  const gloss = [];
+
+  const block = b => {
+    switch(b.t){
+      case "h": return bi(b.ms,b.th,"h3");
+      case "p": return bi(b.ms,b.th);
+      case "note": return `<div class="box note"><div class="label">${bi("Info","ควรรู้")}</div><div style="margin-top:8px">${bi(b.ms,b.th)}</div></div>`;
+      case "vocab":
+        b.rows.forEach(r=>gloss.push(r));
+        return `<div class="tbl"><table><thead><tr>${hd("Bil.","ที่")}${hd("Bahasa Melayu","ภาษามลายู")}${hd("Maksud","ความหมาย")}</tr></thead><tbody>
+          ${b.rows.map((r,i)=>`<tr><td class="n">${i+1}</td><td class="mscell">${esc(r[0])}</td><td class="thcell">${esc(r[1])}</td></tr>`).join("")}</tbody></table></div>`;
+      case "table":
+        return `<div class="tbl"><table><thead><tr>${b.head.map(h=>hd(h[0],h[1])).join("")}</tr></thead><tbody>
+          ${b.rows.map(r=>`<tr>${r.map((c,i)=>{
+            if(b.jawiCol!==undefined && i===0) return `<td><span class="jawi" lang="ms-Arab">${esc(c)}</span></td>`;
+            if(isThai(c)) return `<td class="thcell">${esc(c)}</td>`;
+            const m = c.match(/^(.*?)\s{2}(\S+)$/); // "cawan  چاون"
+            if(m && /[؀-ۿ]/.test(m[2])) return `<td class="mscell">${esc(m[1])} <span class="jawi" lang="ms-Arab">${esc(m[2])}</span></td>`;
+            return `<td class="${i===0?'mscell':'msplain'}">${esc(c)}</td>`;}).join("")}</tr>`).join("")}</tbody></table></div>`;
+      case "grid": return `<div class="grid">${b.cells.map(c=>`<div><b>${c[0]}</b><span>${esc(c[1])}</span></div>`).join("")}</div>`;
+      case "jawi": return `<div class="jgrid">${b.cells.map(c=>`<div><span class="jawi" lang="ms-Arab">${c[0]}</span><small>${esc(c[1])}</small></div>`).join("")}</div>`;
+      case "dialog": return `<div class="dialog">${b.lines.map(l=>`<div class="dl"><span class="who">${esc(l[0])} :</span>${bi(l[1],l[2])}</div>`).join("")}</div>`;
+      case "pola": return `<div class="box"><div class="label">${bi("Pola ayat","รูปประโยค")}</div><div style="margin-top:10px">${b.rows.map(r=>bi(r[0],r[1])).join("")}</div></div>`;
+      case "reading": return `<div class="reading"><h4>${esc(b.title)}</h4>${b.paras.map(p=>bi(p[0],p[1])).join("")}</div>`;
+      case "poem": return `<div class="poem">${b.lines.map(l=>bi(l[0],l[1])).join("")}</div>`;
+      case "steps": return `<ol class="steps">${b.rows.map(r=>`<li>${bi(r[0],r[1])}</li>`).join("")}</ol>`;
+      case "check": return `<ul class="check">${b.rows.map(r=>`<li>${bi(r[0],r[1])}</li>`).join("")}</ul>`;
+    }
+    return "";
+  };
+
+  const pdfBtn = id => inIframe ? "" : `<button class="pdf" type="button" data-pdf="${id}"><span>Muat turun PDF</span><span>ดาวน์โหลด PDF</span></button>`;
+
+  B.units.forEach(u=>{
+    out.push(`<section class="sheet unitsheet" id="unit${u.no}">
+      <div class="big">${u.no}</div>
+      ${bi("Unit "+u.no,"หน่วยที่ "+u.no)}
+      <h2 style="margin-top:12px">${bi(u.ms,u.th,"span")}</h2>
+      <div style="margin-top:22px">${bi(lessonsByUnit(u).length+" pelajaran · "+u.jam+" jam","จำนวน "+lessonsByUnit(u).length+" บท · "+u.jam+" ชั่วโมง")}</div>
+      ${folio("Unit "+u.no)}
+    </section>`);
+    lessonsByUnit(u).forEach(l=>{
+      pelNo++; l.no = pelNo;
+      const startPage = page+1; lessonPage[l.id]=startPage;
+      out.push(`<section class="sheet lesson" id="${l.id}">
+        ${pdfBtn(l.id)}
+        <div class="eyebrow"><span>Unit ${u.no} · Pelajaran ${l.no}</span><span class="th">หน่วยที่ ${u.no} · บทที่ ${l.no}</span></div>
+        <div class="ltitle">${bi(l.ms,l.th,"h2")}</div>
+        <div class="sec"><div class="box"><div class="label">${bi("Objektif pembelajaran","จุดประสงค์การเรียนรู้")}</div>
+          <ul>${l.obj.map(o=>`<li>${bi(o[0],o[1])}</li>`).join("")}</ul></div></div>
+        <div class="sec">${l.blocks.map(block).join("\n")}</div>
+        <div class="sec">${bi("Latihan","แบบฝึกหัด","h3")}
+          <div class="lat">${l.latihan.map((q,i)=>`<div class="q"><span class="num">${i+1}.</span>${bi(q.q[0],q.q[1])}
+            <div class="items">${q.items.map(it=>bi(it[0],it[1])).join("")}</div></div>`).join("")}</div>
+        </div>
+        <div class="box nilai"><div class="label">${bi("Nilai murni","ข้อคิด")}</div><div style="margin-top:8px">${bi(l.nilai[0],l.nilai[1])}</div></div>
+        ${folio("Pelajaran "+l.no+" · "+l.ms)}
+      </section>`);
+    });
+  });
+
+  /* glosari */
+  const gmap = new Map();
+  gloss.forEach(([m,t])=>{ if(!/[.?!]$/.test(m) && !m.includes("...")) { const k=m.toLowerCase(); if(!gmap.has(k)) gmap.set(k,[m,t]); }});
+  const glist = [...gmap.values()].sort((a,b)=>a[0].localeCompare(b[0],"ms"));
+  out.push(`<section class="sheet" id="glosari">
+    <div class="ltitle">${bi("Glosari","อภิธานศัพท์","h2")}</div>
+    <div class="sec">${bi(glist.length+" perkataan disusun mengikut abjad.","คำศัพท์ "+glist.length+" คำ เรียงตามลำดับอักษร")}
+      <div class="tbl"><table><thead><tr>${hd("Bahasa Melayu","ภาษามลายู")}${hd("Maksud","ความหมาย")}</tr></thead><tbody>
+      ${glist.map(g=>`<tr><td class="mscell">${esc(g[0])}</td><td class="thcell">${esc(g[1])}</td></tr>`).join("")}</tbody></table></div></div>
+    ${folio("Glosari")}
+  </section>`);
+
+  /* jawapan */
+  const ansCell = a => {
+    const parts = a.split(" / ");
+    const last = parts[parts.length-1];
+    if(parts.length>1 && isThai(last)) return bi(parts.slice(0,-1).join(" / "), last);
+    return isThai(a) ? `<span class="th">${esc(a)}</span>` : `<span class="ms">${esc(a)}</span>`;
+  };
+  out.push(`<section class="sheet" id="jawapan">
+    <div class="ltitle">${bi("Jawapan Latihan","เฉลยแบบฝึกหัด","h2")}</div>
+    <div class="sec"><div class="tbl"><table><thead><tr>${hd("Pelajaran","บทที่")}${hd("Latihan","ข้อ")}${hd("Jawapan","คำตอบ")}</tr></thead><tbody>
+    ${B.lessons.map(l=>l.jawapan.map((j,i)=>`<tr><td class="n">${i===0?l.no:""}</td><td class="n">${j[0]}</td><td>${ansCell(j[1])}</td></tr>`).join("")).join("")}
+    </tbody></table></div></div>
+    ${folio("Jawapan")}
+  </section>`);
+
+  /* rujukan */
+  out.push(`<section class="sheet" id="rujukan">
+    <div class="ltitle">${bi("Rujukan","บรรณานุกรม","h2")}</div>
+    <div class="sec">${bi("Senarai rujukan disusun mengikut gaya APA edisi ke-7.","รายการอ้างอิงเรียงตามรูปแบบ APA ฉบับที่ 7")}
+      <ul class="refs">${B.rujukan.map(r=>`<li>${r}</li>`).join("")}</ul></div>
+    ${folio("Rujukan")}
+  </section>`);
+
+  /* kandungan */
+  out[tocIndex] = `<section class="sheet" id="kandungan">
+    <div class="ltitle">${bi("Kandungan","สารบัญ","h2")}</div>
+    <div class="sec"><ul class="toc">
+      ${B.units.map(u=>`<li><h3>${bi("Unit "+u.no+" · "+u.ms,"หน่วยที่ "+u.no+" "+u.th,"span")}</h3><ol>
+        ${lessonsByUnit(u).map(l=>`<li><a href="#${l.id}"><span class="no">${l.no}</span>${bi(l.ms,l.th,"span")}<span class="pg">${lessonPage[l.id]}</span></a></li>`).join("")}
+      </ol></li>`).join("")}
+      <li><h3>${bi("Lampiran","ภาคผนวก","span")}</h3><ol>
+        <li><a href="#glosari"><span class="no">A</span>${bi("Glosari","อภิธานศัพท์","span")}<span class="pg"></span></a></li>
+        <li><a href="#jawapan"><span class="no">B</span>${bi("Jawapan Latihan","เฉลยแบบฝึกหัด","span")}<span class="pg"></span></a></li>
+        <li><a href="#rujukan"><span class="no">C</span>${bi("Rujukan","บรรณานุกรม","span")}<span class="pg"></span></a></li>
+      </ol></li>
+    </ul></div>
+    <footer class="folio"><span>Kandungan</span><span>${tocPage}</span></footer>
+  </section>`;
+
+  document.getElementById("book").innerHTML = out.join("\n");
+
+  /* PDF satu pelajaran (berfungsi di GitHub Pages) */
+  document.addEventListener("click", e=>{
+    const btn = e.target.closest("[data-pdf]"); if(!btn) return;
+    const sheet = document.getElementById(btn.dataset.pdf);
+    document.body.classList.add("print-one"); sheet.classList.add("print-target");
+    const t = document.title; document.title = "BM1-Pelajaran-" + btn.dataset.pdf.slice(1);
+    window.print();
+    setTimeout(()=>{ document.body.classList.remove("print-one"); sheet.classList.remove("print-target"); document.title = t; }, 500);
+  });
+})();
+</script>
+
+<script data-goatcounter="https://buku-bm-m20273.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
