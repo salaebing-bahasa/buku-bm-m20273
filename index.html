@@ -16,7 +16,7 @@
 :root{
   --desk:#E7EAF0; --paper:#FFFEFB; --ink:#1A2233; --muted:#596379; --rule:#D9DEE8;
   --brand:#27468A; --brand-tint:#EDF1F9; --gold:#8F6705; --gold-line:#B8860B; --gold-tint:#FBF4E2;
-  --on-brand:#FFFFFF; --ok:#1E7A45; --ok-tint:#E4F4EA; --bad:#B3261E; --bad-tint:#FCE8E6;
+  --on-brand:#FFFFFF; --cover:#1E3A78; --cover-ink:#FFFFFF; --cover-gold:#E3B94B; --ok:#1E7A45; --ok-tint:#E4F4EA; --bad:#B3261E; --bad-tint:#FCE8E6;
   --shadow:0 1px 2px rgba(26,34,51,.08),0 8px 28px rgba(26,34,51,.10);
   --f-ms:"Literata",Georgia,"Times New Roman",serif;
   --f-th:"Sarabun","Leelawadee UI","Tahoma",sans-serif;
@@ -26,12 +26,12 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --desk:#0E1320; --paper:#171E2C; --ink:#E6EAF2; --muted:#9CA6BA; --rule:#2B3446;
   --brand:#A3BCF2; --brand-tint:#1E2840; --gold:#E2B850; --gold-line:#C89B2E; --gold-tint:#2A2517;
-  --on-brand:#0E1320; --ok:#7FD39F; --ok-tint:#173023; --bad:#F19A92; --bad-tint:#3A1D1A;
+  --on-brand:#0E1320; --cover:#1B2B52; --cover-ink:#F2F4FA; --cover-gold:#E3B94B; --ok:#7FD39F; --ok-tint:#173023; --bad:#F19A92; --bad-tint:#3A1D1A;
   --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark }}
 :root[data-theme="dark"]{
   --desk:#0E1320; --paper:#171E2C; --ink:#E6EAF2; --muted:#9CA6BA; --rule:#2B3446;
   --brand:#A3BCF2; --brand-tint:#1E2840; --gold:#E2B850; --gold-line:#C89B2E; --gold-tint:#2A2517;
-  --on-brand:#0E1320; --ok:#7FD39F; --ok-tint:#173023; --bad:#F19A92; --bad-tint:#3A1D1A;
+  --on-brand:#0E1320; --cover:#1B2B52; --cover-ink:#F2F4FA; --cover-gold:#E3B94B; --ok:#7FD39F; --ok-tint:#173023; --bad:#F19A92; --bad-tint:#3A1D1A;
   --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark }
 
 *{box-sizing:border-box}
@@ -244,6 +244,74 @@ details.model summary{cursor:pointer;color:var(--brand)}
 .refs{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
 .refs li{padding-left:2em;text-indent:-2em;overflow-wrap:anywhere}
 
+
+/* ---------- mod buku: satu halaman pada satu masa ---------- */
+@media screen{ .sheet.off{display:none} }
+body{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+.sheet.turn-next{animation:turnNext .32s ease-out}
+.sheet.turn-prev{animation:turnPrev .32s ease-out}
+@keyframes turnNext{from{opacity:.2;transform:perspective(1400px) rotateY(-10deg) translateX(40px);transform-origin:left center}to{opacity:1;transform:none}}
+@keyframes turnPrev{from{opacity:.2;transform:perspective(1400px) rotateY(10deg) translateX(-40px);transform-origin:right center}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.sheet.turn-next,.sheet.turn-prev{animation:none}}
+.pager{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--paper);border-top:1px solid var(--rule);box-shadow:0 -4px 18px rgba(26,34,51,.08);
+  padding-block:8px calc(8px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.pager-in{max-width:860px;margin:0 auto;display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center}
+.pg-btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--brand);background:var(--paper);color:var(--brand);border-radius:8px;padding:6px 14px;min-height:44px;cursor:pointer;line-height:1.25;text-align:left}
+.pg-btn.next{background:var(--brand);color:var(--on-brand)}
+.pg-btn:disabled{opacity:.35;cursor:default}
+.pg-btn svg{width:18px;height:18px;flex:none}
+.pg-btn small{display:block;font-size:12px;opacity:.85}
+.pg-mid{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
+.pg-where{border:none;background:none;cursor:pointer;color:var(--ink);font-size:14px;line-height:1.3;text-align:center;max-width:100%;padding:2px 6px;border-radius:6px}
+.pg-where b{font-family:var(--f-ms);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pg-where span{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+.pg-where:hover{background:var(--brand-tint)}
+.pg-track{width:100%;max-width:320px;height:4px;border-radius:2px;background:var(--rule);overflow:hidden}
+.pg-track i{display:block;height:100%;background:var(--brand);width:0;transition:width .25s}
+@media (max-width:520px){.pg-btn small,.pg-btn .lbl{display:none}.pg-btn{padding:6px 12px}}
+.swipe-hint{font-size:12px;color:var(--muted);text-align:center}
+
+.drawer-bg{position:fixed;inset:0;background:rgba(10,14,24,.45);z-index:20}
+.drawer{position:fixed;top:0;bottom:0;right:0;width:min(420px,92vw);z-index:21;background:var(--paper);box-shadow:-8px 0 30px rgba(0,0,0,.25);display:flex;flex-direction:column;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-right:env(safe-area-inset-right,0px)}
+.drawer header{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:2px solid var(--brand)}
+.drawer header .ms{font-size:20px;font-weight:700;color:var(--brand)}
+.drawer .x{border:1px solid var(--rule);background:var(--paper);border-radius:8px;width:40px;height:40px;cursor:pointer;font-size:20px;line-height:1}
+.drawer nav{overflow-y:auto;padding:8px 10px 20px;flex:1}
+.drawer .grp{font-family:var(--f-ms);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);padding:14px 8px 4px}
+.drawer a{display:grid;grid-template-columns:2.2em 1fr auto;gap:8px;align-items:center;padding:8px;border-radius:8px;text-decoration:none;color:var(--ink)}
+.drawer a:hover{background:var(--brand-tint)}
+.drawer a[aria-current="page"]{background:var(--brand);color:var(--on-brand)}
+.drawer a[aria-current="page"] .th,.drawer a[aria-current="page"] .no,.drawer a[aria-current="page"] .pgn{color:var(--on-brand)}
+.drawer .no{font-family:var(--f-ms);color:var(--gold);font-variant-numeric:tabular-nums}
+.drawer .pgn{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.drawer .ms{font-size:15px}.drawer .th{font-size:13px}
+
+/* kulit buku */
+.sheet.cover{background:var(--cover);color:var(--cover-ink);border-top:none;padding:clamp(14px,3vw,22px);border-radius:4px 10px 10px 4px;
+  box-shadow:inset 10px 0 0 rgba(0,0,0,.18),inset 13px 0 0 rgba(255,255,255,.06),var(--shadow)}
+.cv-frame{border:2px solid var(--cover-gold);border-radius:4px;outline:1px solid color-mix(in srgb,var(--cover-gold) 50%,transparent);outline-offset:-8px;
+  padding:clamp(28px,6vw,60px) clamp(16px,5vw,48px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;
+  background-image:repeating-linear-gradient(45deg,color-mix(in srgb,var(--cover-gold) 9%,transparent) 0 1px,transparent 1px 22px),repeating-linear-gradient(-45deg,color-mix(in srgb,var(--cover-gold) 9%,transparent) 0 1px,transparent 1px 22px)}
+.cover .ms,.cover .th{color:var(--cover-ink)}
+.cover .th{opacity:.85}
+.cv-top .ms{font-size:14px;letter-spacing:.3em;text-transform:uppercase}
+.cover .jawi{font-size:clamp(28px,6vw,40px);color:var(--cover-gold);margin-top:14px}
+.cover h1{font-family:var(--f-ms);font-size:clamp(40px,9vw,72px);line-height:1.05;color:var(--cover-ink);margin:8px 0 0;text-wrap:balance}
+.cover h1 .one{color:var(--cover-gold)}
+.cover .sub{font-size:20px;margin:4px 0 0}
+.cover .code{font-size:14px;opacity:.75;margin:0}
+.cover .art{font-size:clamp(30px,7vw,48px);letter-spacing:.18em;margin:26px 0 18px;background:color-mix(in srgb,var(--cover-ink) 10%,transparent);border-radius:999px;padding:10px 22px}
+.cv-level{margin-top:6px}
+.cv-level .ms{font-weight:600}
+.cv-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:26px}
+.cv-btn{border:1px solid var(--cover-gold);background:transparent;color:var(--cover-ink);border-radius:8px;padding:8px 18px;min-height:44px;cursor:pointer;line-height:1.25}
+.cv-btn.primary{background:var(--cover-gold);color:#1A2233;border-color:var(--cover-gold);font-weight:600}
+.cv-btn small{display:block;font-size:12px;opacity:.85}
+.cv-by{margin-top:34px;padding-top:18px;border-top:1px solid color-mix(in srgb,var(--cover-gold) 60%,transparent);display:flex;flex-direction:column;gap:4px}
+.cv-by .ms{font-weight:600}
+.cover .rule{display:none}
+
 @media (max-width:520px){.dl{grid-template-columns:34px 1fr auto;gap:8px}.av{width:34px;height:34px;font-size:13px}.ltitle .emo{display:none}}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 @media print{
@@ -252,6 +320,8 @@ details.model summary{cursor:pointer;color:var(--brand)}
   .book{margin:0;gap:0;max-width:none}
   .sheet{box-shadow:none;border-radius:0;page-break-after:always}
   body.print-one .sheet:not(.print-target){display:none}
+  .pager,.drawer,.drawer-bg{display:none!important}
+  .sheet.cover{background:#fff;color:#000}
   .cards.hide-th .card .m{visibility:visible}
 }
 </style>
@@ -262,9 +332,19 @@ details.model summary{cursor:pointer;color:var(--brand)}
 <header class="bar"><div class="bar-in">
   <b>Buku Teks Bahasa Melayu 1</b>
   <button class="pill" id="laju" type="button" aria-pressed="false" title="Kelajuan suara · ความเร็วเสียง">Suara perlahan · เสียงช้า</button>
-  <a class="pill" href="#kandungan">Kandungan · สารบัญ</a>
+  <button class="pill" type="button" data-drawer>Kandungan · สารบัญ</button>
 </div></header>
 <main class="book" id="book"></main>
+<nav class="pager" aria-label="Halaman · หน้า"><div class="pager-in">
+  <button class="pg-btn" id="pg-prev" type="button" aria-label="Halaman sebelum · หน้าก่อน"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span class="lbl">Sebelum<small>ก่อนหน้า</small></span></button>
+  <div class="pg-mid"><button class="pg-where" id="pg-where" type="button" data-drawer aria-label="Buka kandungan · เปิดสารบัญ"><b id="pg-title">Kulit</b><span id="pg-num"></span></button><div class="pg-track"><i id="pg-bar"></i></div></div>
+  <button class="pg-btn next" id="pg-next" type="button" aria-label="Halaman seterusnya · หน้าถัดไป"><span class="lbl">Seterusnya<small>ถัดไป</small></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+</div></nav>
+<div class="drawer-bg" id="drawer-bg" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="Kandungan · สารบัญ">
+  <header><div class="bi"><p class="ms">Kandungan</p><p class="th">สารบัญ</p></div><button class="x" type="button" id="drawer-x" aria-label="Tutup · ปิด">×</button></header>
+  <nav id="drawer-nav"></nav>
+</aside>
 
 <script src="data.js"></script>
 <script src="latihan.js"></script>
@@ -303,21 +383,25 @@ details.model summary{cursor:pointer;color:var(--brand)}
 
   /* ---------- kulit ---------- */
   out.push(`<section class="sheet cover" id="kulit">
-    <div class="meta">${bi("Buku Teks Bahasa Melayu 1","หนังสือเรียนภาษามลายู 1")}</div>
-    <span class="jawi" lang="ms-Arab">بوکو تيکس بهاس ملايو</span>
-    <div class="rule"></div>
-    <h1>Bahasa Melayu 1</h1>
-    <p class="th sub">รายวิชา ม20273 ภาษาที่ 2 (ภาษามลายู 1)</p>
-    <p class="art">${emo("👋")} ${emo("👨‍👩‍👧")} ${emo("🏫")} ${emo("🍛")} ${emo("🌙")}</p>
-    <div class="rule"></div>
-    <div class="meta">
-      ${bi("Tingkatan 1 · Semester 2 · 40 jam · 1.0 kredit","ชั้นมัธยมศึกษาปีที่ 1 ภาคเรียนที่ 2 · 40 ชั่วโมง · 1.0 หน่วยกิต")}
+    <div class="cv-frame">
+      <div class="cv-top">${bi("Buku Teks","หนังสือเรียน")}</div>
+      <span class="jawi" lang="ms-Arab">بوکو تيکس بهاس ملايو</span>
+      <h1>Bahasa Melayu <span class="one">1</span></h1>
+      <p class="th sub">หนังสือเรียนภาษามลายู 1</p>
+      <p class="th code">รายวิชาภาษาที่ 2 (ภาษามลายู 1)</p>
+      <p class="art">${emo("👋")} ${emo("👨‍👩‍👧")} ${emo("🏫")} ${emo("🍛")} ${emo("🌙")}</p>
+      <div class="cv-level">${bi("Tingkatan 1 · Semester 2","ชั้นมัธยมศึกษาปีที่ 1 ภาคเรียนที่ 2")}</div>
       ${bi("Bidang Pembelajaran Bahasa Asing","กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ")}
-    </div>
-    <div class="meta by">
-      ${bi("Disusun oleh","เรียบเรียงโดย")}
-      ${bi("Asst. Prof. Muhammad Salaebing","ผศ.มูหำหมัด สาแลบิง")}
-      ${bi("Program Bahasa Melayu, Fakulti Kemanusiaan dan Sains Sosial, Universiti Thaksin","สาขาวิชาภาษามลายู คณะมนุษยศาสตร์และสังคมศาสตร์ มหาวิทยาลัยทักษิณ")}
+      <div class="cv-actions">
+        <button class="cv-btn primary" type="button" data-go="prakata">Buka buku<small>เปิดหนังสือ</small></button>
+        <button class="cv-btn" type="button" data-go="kandungan">Kandungan<small>สารบัญ</small></button>
+        <button class="cv-btn" type="button" id="resume" hidden></button>
+      </div>
+      <div class="cv-by">
+        ${bi("Disusun oleh","เรียบเรียงโดย")}
+        ${bi("Asst. Prof. Muhammad Salaebing","ผศ.มูหำหมัด สาแลบิง")}
+        ${bi("Program Bahasa Melayu, Fakulti Kemanusiaan dan Sains Sosial, Universiti Thaksin","สาขาวิชาภาษามลายู คณะมนุษยศาสตร์และสังคมศาสตร์ มหาวิทยาลัยทักษิณ")}
+      </div>
     </div>
   </section>`);
 
@@ -681,6 +765,98 @@ details.model summary{cursor:pointer;color:var(--brand)}
     if ((e.key==="Enter"||e.key===" ") && e.target.matches("[data-say-row]")) { e.preventDefault(); e.target.click(); }
   });
   document.querySelectorAll("[data-say-row]").forEach(el=>{ el.tabIndex = 0; el.setAttribute("role","button"); });
+
+  /* ================= MOD BUKU ================= */
+  const sheets = [...document.querySelectorAll("#book > .sheet")];
+  const labelOf = sh => {
+    const id = sh.id;
+    const l = B.lessons.find(x=>x.id===id);
+    if (id==="kulit") return {ms:"Kulit", th:"ปก", grp:""};
+    if (l) return {ms:l.ms, th:l.th, no:l.no, grp:"Unit "+l.unit};
+    const u = B.units.find(x=>"unit"+x.no===id);
+    if (u) return {ms:"Unit "+u.no+" · "+u.ms, th:"หน่วยที่ "+u.no+" "+u.th, grp:"Unit "+u.no};
+    const fixed = {prakata:["Prakata","คำนำ"],hasil:["Hasil Pembelajaran","ผลการเรียนรู้"],kandungan:["Kandungan","สารบัญ"],glosari:["Glosari","อภิธานศัพท์"],jawapan:["Jawapan Latihan","เฉลยแบบฝึกหัด"],rujukan:["Rujukan","บรรณานุกรม"]}[id] || [id,""];
+    return {ms:fixed[0], th:fixed[1], grp: ["glosari","jawapan","rujukan"].includes(id) ? "Lampiran" : "Awal"};
+  };
+  const pgOf = sh => { const f = sh.querySelector(".folio > span:last-child"); return f ? f.textContent : ""; };
+  const lastPg = pgOf(sheets[sheets.length-1]);
+  let cur = -1;
+  const el = id => document.getElementById(id);
+  const prevB = el("pg-prev"), nextB = el("pg-next");
+
+  // kandungan laci
+  let grp = null, nav = "";
+  sheets.forEach((sh,i)=>{
+    const lb = labelOf(sh);
+    if (lb.grp !== grp){ grp = lb.grp; const gt = {Awal:"Bahagian awal · ส่วนนำ",Lampiran:"Lampiran · ภาคผนวก"}[grp] || (grp ? grp.replace("Unit ","Unit ")+" · หน่วยที่ "+grp.split(" ")[1] : ""); if (gt) nav += `<div class="grp">${gt}</div>`; }
+    nav += `<a href="#${sh.id}" data-i="${i}"><span class="no">${lb.no||""}</span>${bi(lb.ms,lb.th,"span")}<span class="pgn">${pgOf(sh)}</span></a>`;
+  });
+  el("drawer-nav").innerHTML = nav;
+  const drawer = el("drawer"), dbg = el("drawer-bg");
+  let lastFocus = null;
+  const openDrawer = () => { lastFocus = document.activeElement; drawer.hidden = false; dbg.hidden = false; const c = drawer.querySelector('[aria-current="page"]') || drawer.querySelector("a"); c && c.scrollIntoView({block:"center"}); el("drawer-x").focus(); };
+  const closeDrawer = () => { drawer.hidden = true; dbg.hidden = true; lastFocus && lastFocus.focus && lastFocus.focus(); };
+  el("drawer-x").addEventListener("click", closeDrawer);
+  dbg.addEventListener("click", closeDrawer);
+  document.addEventListener("click", e=>{ if (e.target.closest("[data-drawer]")) { e.preventDefault(); openDrawer(); } });
+
+  function show(i, dir){
+    i = Math.max(0, Math.min(sheets.length-1, i));
+    if (i===cur) return;
+    stopAll();
+    if (dir===undefined) dir = i > cur ? 1 : -1;
+    sheets.forEach((sh,k)=>{ sh.classList.toggle("off", k!==i); sh.classList.remove("turn-next","turn-prev"); });
+    const sh = sheets[i]; void sh.offsetWidth;
+    if (cur !== -1) sh.classList.add(dir>0 ? "turn-next" : "turn-prev");
+    cur = i;
+    window.scrollTo({top:0, behavior:"instant"});
+    const lb = labelOf(sh);
+    el("pg-title").textContent = lb.no ? lb.no+". "+lb.ms : lb.ms;
+    el("pg-num").textContent = pgOf(sh) ? `Halaman · หน้า ${pgOf(sh)} / ${lastPg}` : "Kulit · ปก";
+    el("pg-bar").style.width = (i/(sheets.length-1)*100)+"%";
+    prevB.disabled = i===0; nextB.disabled = i===sheets.length-1;
+    drawer.querySelectorAll("a").forEach(a=>a.toggleAttribute("aria-current", +a.dataset.i===i) || a.removeAttribute("aria-current"));
+    drawer.querySelector(`a[data-i="${i}"]`).setAttribute("aria-current","page");
+    if (location.hash !== "#"+sh.id){ try { history.replaceState(null,"","#"+sh.id); } catch(e){ location.hash = sh.id; } }
+    if (i>0) store.set("bm1-halaman", sh.id);
+  }
+  const go = id => { const i = sheets.findIndex(s=>s.id===id); if (i>-1) show(i); };
+  prevB.addEventListener("click", ()=>show(cur-1,-1));
+  nextB.addEventListener("click", ()=>show(cur+1,1));
+  document.addEventListener("click", e=>{
+    const g = e.target.closest("[data-go]"); if (g){ go(g.dataset.go); return; }
+    const a = e.target.closest('a[href^="#"]');
+    if (a){ const id = a.getAttribute("href").slice(1); if (sheets.some(s=>s.id===id)){ e.preventDefault(); if (!drawer.hidden) drawer.hidden = dbg.hidden = true; go(id); } }
+  });
+  window.addEventListener("hashchange", ()=>go(location.hash.slice(1)));
+  document.addEventListener("keydown", e=>{
+    if (e.key==="Escape" && !drawer.hidden){ closeDrawer(); return; }
+    if (e.target.closest("input,textarea,select,[contenteditable]") || e.altKey || e.ctrlKey || e.metaKey) return;
+    if (e.key==="ArrowRight"){ show(cur+1,1); } else if (e.key==="ArrowLeft"){ show(cur-1,-1); }
+  });
+  // leret (swipe)
+  let sx=0, sy=0, st=0, track=false;
+  const book = el("book");
+  book.addEventListener("touchstart", e=>{
+    if (e.touches.length!==1 || e.target.closest("input,textarea,.tbl,.tray,.built,.jgrid")) { track=false; return; }
+    track=true; sx=e.touches[0].clientX; sy=e.touches[0].clientY; st=Date.now();
+  }, {passive:true});
+  book.addEventListener("touchend", e=>{
+    if (!track) return; track=false;
+    const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy)*1.6 && Date.now()-st < 700) show(cur + (dx<0?1:-1), dx<0?1:-1);
+  }, {passive:true});
+
+  // mula
+  const saved = store.get("bm1-halaman");
+  const rb = el("resume");
+  if (saved && sheets.some(s=>s.id===saved) && saved!=="prakata"){
+    const sh = el(saved), lb = labelOf(sh);
+    rb.innerHTML = `Sambung bacaan: ${esc(lb.no? lb.no+". "+lb.ms : lb.ms)}<small>อ่านต่อ หน้า ${pgOf(sh)}</small>`;
+    rb.dataset.go = saved; rb.hidden = false;
+  }
+  const startId = location.hash.slice(1);
+  show(Math.max(0, sheets.findIndex(s=>s.id===startId)));
 })();
 </script>
 
