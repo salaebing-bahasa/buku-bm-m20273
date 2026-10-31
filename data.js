@@ -63,15 +63,6 @@ window.BUKU = {
         ["Ini kawan saya, + nama → Ini kawan saya, Aminah.", "นี่คือเพื่อนของฉัน + ชื่อ → นี่คือเพื่อนของฉัน อามีนะห์"]
       ]}
     ],
-    latihan: [
-      { q: ["Tulis ucapan salam yang sesuai dengan waktu.", "เขียนคำทักทายให้เหมาะกับเวลา"],
-        items: [["1) 7.00 pagi → ______________", ""], ["2) 12.30 tengah hari → ______________", ""], ["3) 4.00 petang → ______________", ""], ["4) 9.00 malam → ______________", ""]] },
-      { q: ["Lengkapkan dialog.", "เติมบทสนทนาให้สมบูรณ์"],
-        items: [["1) A: Apa khabar?  B: ________ baik.", ""], ["2) A: Siapa ________ kamu?  B: Nama saya Dao.", ""], ["3) A: Terima kasih.  B: ________.", ""]] },
-      { q: ["Perkenalkan diri kamu kepada rakan di sebelah.", "แนะนำตัวกับเพื่อนที่นั่งข้าง ๆ"],
-        items: [["“Selamat pagi. Nama saya ... Saya murid Tingkatan 1.”", ""]] }
-    ],
-    jawapan: [["1", "Selamat pagi, Selamat tengah hari, Selamat petang, Selamat malam"], ["2", "Khabar, nama, Sama-sama"], ["3", "Jawapan bebas / ตอบได้หลากหลาย"]],
     nilai: ["Memberi salam dengan senyuman menunjukkan kita menghormati orang lain.", "การทักทายด้วยรอยยิ้มแสดงว่าเราให้เกียรติผู้อื่น"]
   },
   {
@@ -100,15 +91,6 @@ window.BUKU = {
         ["Berapakah nombor telefon kamu? → Nombor telefon saya ...", "หมายเลขโทรศัพท์ของเธอคืออะไร → หมายเลขโทรศัพท์ของฉันคือ ..."]
       ]}
     ],
-    latihan: [
-      { q: ["Tulis nombor dalam perkataan.", "เขียนตัวเลขเป็นคำ"],
-        items: [["1) 7 = ______________", ""], ["2) 12 = ______________", ""], ["3) 15 = ______________", ""], ["4) 20 = ______________", ""], ["5) 38 = ______________", ""]] },
-      { q: ["Tulis dalam angka.", "เขียนเป็นตัวเลข"],
-        items: [["1) sembilan belas = ______", ""], ["2) empat puluh enam = ______", ""], ["3) seratus = ______", ""]] },
-      { q: ["Jawab soalan dengan ayat lengkap.", "ตอบคำถามเป็นประโยคสมบูรณ์"],
-        items: [["Berapakah umur kamu? ______________________________", ""]] }
-    ],
-    jawapan: [["1", "tujuh, dua belas, lima belas, dua puluh, tiga puluh lapan"], ["2", "19, 46, 100"], ["3", "Umur saya ... tahun."]],
     nilai: ["Setiap tahun umur kita bertambah. Gunakan masa dengan sebaik-baiknya.", "อายุของเราเพิ่มขึ้นทุกปี จงใช้เวลาให้เกิดประโยชน์ที่สุด"]
   },
   {
@@ -138,13 +120,6 @@ window.BUKU = {
         ["Cikgu", "Boleh, tetapi jangan lama.", "ได้ แต่อย่านานนะ"]
       ]}
     ],
-    latihan: [
-      { q: ["Padankan arahan dengan maksudnya.", "จับคู่คำสั่งกับความหมาย"],
-        items: [["1) Sila duduk.   2) Angkat tangan.   3) Buka buku.   4) Jangan bising.", "ก. ยกมือ   ข. อย่าส่งเสียงดัง   ค. เชิญนั่ง   ง. เปิดหนังสือ"]] },
-      { q: ["Isi tempat kosong dengan Sila, Tolong atau Jangan.", "เติม Sila, Tolong หรือ Jangan ลงในช่องว่าง"],
-        items: [["1) ________ masuk, murid-murid.", ""], ["2) ________ buang sampah di dalam kelas.", ""], ["3) ________ tutup pintu itu.", ""]] }
-    ],
-    jawapan: [["1", "1–ค, 2–ก, 3–ง, 4–ข"], ["2", "Sila, Jangan, Tolong"]],
     nilai: ["Murid yang mendengar arahan guru dengan teliti ialah murid yang berdisiplin.", "นักเรียนที่ตั้งใจฟังคำสั่งของครูคือนักเรียนที่มีวินัย"]
   },
   {
@@ -178,15 +153,6 @@ window.BUKU = {
       { t: "note", ms: "Ejaan Jawi dalam buku ini mengikut kaedah Pedoman Umum Ejaan Jawi Bahasa Melayu (Dewan Bahasa dan Pustaka) dan Pusat Rujukan Persuratan Melayu (PRPM).",
         th: "การสะกดอักษรยาวีในหนังสือเล่มนี้ยึดตามหลักเกณฑ์ใน Pedoman Umum Ejaan Jawi Bahasa Melayu ของสภาภาษาและวรรณกรรมมาเลเซีย (DBP) และ PRPM" }
     ],
-    latihan: [
-      { q: ["Tulis huruf vokal yang hilang.", "เขียนสระที่หายไป"],
-        items: [["1) b_ku (buku)", "หนังสือ"], ["2) m_ja (meja)", "โต๊ะ"], ["3) ik_n (ikan)", "ปลา"], ["4) ul_r (ular)", "งู"]] },
-      { q: ["Garis konsonan gabungan dalam perkataan ini.", "ขีดเส้นใต้พยัญชนะประสมในคำต่อไปนี้"],
-        items: [["bunga • nyanyi • khabar • syukur", ""]] },
-      { q: ["Tulis nama huruf Jawi ini.", "เขียนชื่อของอักษรยาวีต่อไปนี้"],
-        items: [["1) ب   2) م   3) ڠ   4) ڤ", ""]] }
-    ],
-    jawapan: [["1", "u, e, a, a"], ["2", "ng, ny (2 kali), kh, sy"], ["3", "ba, mim, nga, pa"]],
     nilai: ["Sebutan yang jelas membantu orang lain memahami kita dengan betul.", "การออกเสียงที่ชัดเจนช่วยให้ผู้อื่นเข้าใจเราได้ถูกต้อง"]
   },
   {
@@ -196,15 +162,6 @@ window.BUKU = {
       { t: "p", ms: "Bahagian ini mengulang kaji semua pelajaran dalam Unit 1. Buat latihan sendiri dahulu, kemudian semak jawapan bersama rakan.",
         th: "ส่วนนี้ทบทวนทุกบทในหน่วยที่ 1 ทำแบบฝึกหัดด้วยตนเองก่อน แล้วตรวจคำตอบร่วมกับเพื่อน" }
     ],
-    latihan: [
-      { q: ["Susun perkataan menjadi ayat.", "เรียงคำให้เป็นประโยค"],
-        items: [["1) kamu / nama / siapa → ______________________", ""], ["2) tahun / saya / dua belas / umur → ______________________", ""], ["3) buku / sila / buka → ______________________", ""]] },
-      { q: ["Kira dan tulis jawapan dalam perkataan.", "คิดเลขแล้วเขียนคำตอบเป็นคำ"],
-        items: [["1) lapan + lima = ______________", ""], ["2) dua puluh + tiga puluh = ______________", ""], ["3) sepuluh − satu = ______________", ""]] },
-      { q: ["Main peranan berpasangan: dua murid bertemu buat kali pertama.", "แสดงบทบาทสมมติเป็นคู่: นักเรียน 2 คนพบกันครั้งแรก"],
-        items: [["Beri salam → perkenalkan diri → tanya umur → ucap selamat tinggal.", "ทักทาย → แนะนำตัว → ถามอายุ → กล่าวลา"]] }
-    ],
-    jawapan: [["1", "Siapa nama kamu? / Umur saya dua belas tahun. / Sila buka buku."], ["2", "tiga belas, lima puluh, sembilan"], ["3", "Jawapan bebas / ตอบได้หลากหลาย"]],
     nilai: ["Sedikit-sedikit, lama-lama jadi bukit. Ulang kaji setiap hari.", "ทีละน้อย นานไปก็กลายเป็นภูเขา ทบทวนบทเรียนทุกวัน"]
   },
 
@@ -235,15 +192,6 @@ window.BUKU = {
         ["Saya ada + bilangan + orang + ahli → Saya ada dua orang adik.", "ฉันมี + จำนวน + คน (ลักษณนาม) + สมาชิก → ฉันมีน้อง 2 คน"]
       ]}
     ],
-    latihan: [
-      { q: ["Jawab soalan berdasarkan bacaan.", "ตอบคำถามจากเรื่องที่อ่าน"],
-        items: [["1) Berapa orang ahli keluarga Fah?", ""], ["2) Apakah pekerjaan ibu Fah?", ""], ["3) Berapakah umur adik Fah?", ""]] },
-      { q: ["Tulis perkataan bahasa Melayu.", "เขียนคำภาษามลายู"],
-        items: [["1) ______________", "พ่อ"], ["2) ______________", "แม่"], ["3) ______________", "พี่ชาย"], ["4) ______________", "น้อง"], ["5) ______________", "ย่า ยาย"]] },
-      { q: ["Lukis salasilah keluarga kamu dan perkenalkan kepada kelas.", "วาดแผนผังครอบครัวของตนเองแล้วนำเสนอหน้าชั้น"],
-        items: [["“Ini ayah saya. Nama ayah saya ...”", ""]] }
-    ],
-    jawapan: [["1", "Lima orang. / Jururawat. / Sembilan tahun."], ["2", "ayah (bapa), ibu (emak), abang, adik, nenek"], ["3", "Jawapan bebas / ตอบได้หลากหลาย"]],
     nilai: ["Hormati ibu bapa dan sayangi adik-beradik.", "เคารพพ่อแม่และรักพี่น้อง"]
   },
   {
@@ -273,14 +221,6 @@ window.BUKU = {
         ["Itu + benda (jauh) → Itu kerusi.", "Itu ใช้กับสิ่งที่อยู่ไกล → นั่นคือเก้าอี้"]
       ]}
     ],
-    latihan: [
-      { q: ["Isi tempat kosong dengan Ini atau Itu.", "เติม Ini หรือ Itu"],
-        items: [["1) ________ pemadam saya.", "ถือยางลบอยู่ในมือ"], ["2) ________ padang sekolah.", "ชี้ไปที่สนามซึ่งอยู่ไกล"]] },
-      { q: ["Tulis maksud perkataan.", "เขียนความหมายภาษาไทย"],
-        items: [["1) perpustakaan   2) kantin   3) pemadam   4) pengetua", ""]] },
-      { q: ["Tulis lima benda yang ada di dalam kelas kamu.", "เขียนชื่อสิ่งของในห้องเรียนของเธอ 5 อย่าง"], items: [["______________________________________", ""]] }
-    ],
-    jawapan: [["1", "Ini, Itu"], ["2", "ห้องสมุด, โรงอาหาร, ยางลบ, ผู้อำนวยการโรงเรียน"], ["3", "Jawapan bebas / ตอบได้หลากหลาย"]],
     nilai: ["Jagalah kebersihan kelas dan hormati guru.", "รักษาความสะอาดห้องเรียนและให้ความเคารพครู"]
   },
   {
@@ -310,14 +250,6 @@ window.BUKU = {
          "กระเป๋าของฉันสีน้ำเงิน กระเป๋าใบนั้นใหญ่และใหม่ ดินสอของฉันสีเหลืองและยาว ยางลบของฉันเล็กและสีขาว"]
       ]}
     ],
-    latihan: [
-      { q: ["Lengkapkan ayat dengan warna yang betul.", "เติมสีที่ถูกต้อง"],
-        items: [["1) Langit berwarna ________.", "ท้องฟ้า"], ["2) Daun berwarna ________.", "ใบไม้"], ["3) Susu berwarna ________.", "นม"], ["4) Pisang masak berwarna ________.", "กล้วยสุก"]] },
-      { q: ["Tulis lawan kata.", "เขียนคำตรงข้าม"],
-        items: [["1) besar → ______   2) panjang → ______   3) tinggi → ______   4) bersih → ______", ""]] },
-      { q: ["Huraikan beg kamu dalam dua ayat.", "บรรยายกระเป๋าของเธอ 2 ประโยค"], items: [["______________________________________", ""]] }
-    ],
-    jawapan: [["1", "biru, hijau, putih, kuning"], ["2", "kecil, pendek, rendah, kotor"], ["3", "Jawapan bebas / ตอบได้หลากหลาย"]],
     nilai: ["Setiap warna ada keindahannya. Begitu juga setiap orang ada kelebihan masing-masing.", "สีทุกสีมีความงามของตัวเอง คนแต่ละคนก็มีจุดเด่นของตนเช่นกัน"]
   },
   {
@@ -347,13 +279,6 @@ window.BUKU = {
         ["Ploy", "Saya pula baru balik dari perpustakaan.", "ส่วนฉันเพิ่งกลับมาจากห้องสมุด"]
       ]}
     ],
-    latihan: [
-      { q: ["Isi tempat kosong dengan di, ke atau dari.", "เติม di, ke หรือ dari"],
-        items: [["1) Saya pergi ____ sekolah.", ""], ["2) Ayah bekerja ____ hospital.", ""], ["3) Adik baru pulang ____ pasar.", ""], ["4) Kami bermain ____ taman.", ""]] },
-      { q: ["Padankan tempat dengan maksudnya.", "จับคู่สถานที่กับความหมาย"],
-        items: [["1) hospital   2) pejabat pos   3) balai polis   4) kuil", "ก. วัด   ข. สถานีตำรวจ   ค. โรงพยาบาล   ง. ที่ทำการไปรษณีย์"]] }
-    ],
-    jawapan: [["1", "ke, di, dari, di"], ["2", "1–ค, 2–ง, 3–ข, 4–ก"]],
     nilai: ["Kenali tempat di sekitar kita dan jagalah kemudahan awam.", "รู้จักสถานที่รอบตัวและช่วยกันดูแลสาธารณสมบัติ"]
   },
   {
@@ -373,11 +298,6 @@ window.BUKU = {
         ["Padang sekolah kami besar dan hijau.", "สนามโรงเรียนของเราใหญ่และเขียวขจี"]
       ]}
     ],
-    latihan: [
-      { q: ["Susun perkataan menjadi ayat.", "เรียงคำให้เป็นประโยค"],
-        items: [["1) besar / sekolah / saya → ______________________", ""], ["2) merah / beg / ini → ______________________", ""], ["3) ke / pergi / kakak / pasar → ______________________", ""]] }
-    ],
-    jawapan: [["1", "Sekolah saya besar. / Ini beg merah. / Kakak pergi ke pasar."]],
     nilai: ["Berat sama dipikul, ringan sama dijinjing. Bekerjasama menjadikan kerja lebih mudah.", "หนักก็ช่วยกันแบก เบาก็ช่วยกันหิ้ว การร่วมมือกันทำให้งานง่ายขึ้น"]
   },
 
@@ -410,14 +330,6 @@ window.BUKU = {
         ["Aminah", "Pukul sepuluh pagi.", "10 โมงเช้า"]
       ]}
     ],
-    latihan: [
-      { q: ["Tulis hari selepasnya.", "เขียนชื่อวันถัดไป"],
-        items: [["1) Isnin → ________   2) Khamis → ________   3) Sabtu → ________", ""]] },
-      { q: ["Tulis waktu dalam perkataan.", "เขียนเวลาเป็นคำ"],
-        items: [["1) 7:00 pagi → ______________________", ""], ["2) 8:30 pagi → ______________________", ""], ["3) 3:15 petang → ______________________", ""]] },
-      { q: ["Jawab: Hari ini hari apa? Pukul berapa sekarang?", "ตอบคำถาม: วันนี้วันอะไร ตอนนี้กี่โมง"], items: [["______________________________________", ""]] }
-    ],
-    jawapan: [["1", "Selasa, Jumaat, Ahad"], ["2", "pukul tujuh pagi, pukul lapan setengah pagi, pukul tiga suku petang"], ["3", "Jawapan bebas / ตอบได้หลากหลาย"]],
     nilai: ["Menepati masa ialah tanda kita menghormati orang lain.", "การตรงต่อเวลาแสดงว่าเราให้เกียรติผู้อื่น"]
   },
   {
@@ -447,14 +359,6 @@ window.BUKU = {
         ["Pelaku + perbuatan + waktu → Saya mandi pada pukul enam pagi.", "ผู้กระทำ + กริยา + เวลา → ฉันอาบน้ำตอน 6 โมงเช้า"]
       ]}
     ],
-    latihan: [
-      { q: ["Jawab soalan berdasarkan bacaan.", "ตอบคำถามจากเรื่องที่อ่าน"],
-        items: [["1) Pukul berapa Siti bangun tidur?", ""], ["2) Siapakah yang menghantar Siti ke sekolah?", ""], ["3) Apakah yang Siti buat pada waktu malam?", ""]] },
-      { q: ["Susun aktiviti mengikut urutan.", "เรียงกิจกรรมตามลำดับ"],
-        items: [["bersarapan • bangun tidur • pergi ke sekolah • mandi", ""]] },
-      { q: ["Tulis rutin harian kamu dalam lima ayat.", "เขียนกิจวัตรประจำวันของเธอ 5 ประโยค"], items: [["______________________________________", ""]] }
-    ],
-    jawapan: [["1", "Pukul lima setengah pagi. / Ayah. / Membaca buku."], ["2", "bangun tidur → mandi → bersarapan → pergi ke sekolah"], ["3", "Jawapan bebas / ตอบได้หลากหลาย"]],
     nilai: ["Rutin yang teratur membantu kita belajar dengan lebih baik.", "กิจวัตรที่เป็นระเบียบช่วยให้เราเรียนได้ดีขึ้น"]
   },
   {
@@ -485,14 +389,6 @@ window.BUKU = {
         ["Saya suka + makanan + kerana + rasa → Saya suka mangga kerana manis.", "ฉันชอบ + อาหาร + เพราะ + รส → ฉันชอบมะม่วงเพราะหวาน"]
       ]}
     ],
-    latihan: [
-      { q: ["Tulis rasa yang betul.", "เขียนรสชาติที่ถูกต้อง"],
-        items: [["1) Gula rasanya ________.", "น้ำตาล"], ["2) Garam rasanya ________.", "เกลือ"], ["3) Cili rasanya ________.", "พริก"], ["4) Limau rasanya ________.", "มะนาว"]] },
-      { q: ["Lengkapkan dialog.", "เติมบทสนทนาให้สมบูรณ์"],
-        items: [["A: Adik hendak minum ________?   B: Saya hendak susu.", ""], ["A: Berapa ________?   B: Lima belas baht.", ""]] },
-      { q: ["Tulis makanan kegemaran kamu dan sebabnya.", "เขียนอาหารที่ชอบและเหตุผล"], items: [["Saya suka ________ kerana ________.", ""]] }
-    ],
-    jawapan: [["1", "manis, masin, pedas, masam"], ["2", "apa, harganya"], ["3", "Jawapan bebas / ตอบได้หลากหลาย"]],
     nilai: ["Makanlah makanan yang berkhasiat dan jangan membazir.", "รับประทานอาหารที่มีประโยชน์และอย่ากินทิ้งกินขว้าง"]
   },
   {
@@ -518,12 +414,6 @@ window.BUKU = {
         ["Saya berasa penat kerana saya bermain bola jaring.", "ฉันรู้สึกเหนื่อยเพราะเล่นเน็ตบอล"]
       ]}
     ],
-    latihan: [
-      { q: ["Apakah perasaan kamu dalam situasi ini?", "เธอจะรู้สึกอย่างไรในสถานการณ์ต่อไปนี้"],
-        items: [["1) Saya mendapat hadiah. → ________", ""], ["2) Saya belum makan sejak pagi. → ________", ""], ["3) Saya melihat seekor ular. → ________", ""], ["4) Saya berlari selama satu jam. → ________", ""]] },
-      { q: ["Lengkapkan ayat dengan sebab kamu sendiri.", "เติมประโยคด้วยเหตุผลของตนเอง"], items: [["Saya berasa gembira kerana ______________________.", ""]] }
-    ],
-    jawapan: [["1", "gembira, lapar, takut, penat"], ["2", "Jawapan bebas / ตอบได้หลากหลาย"]],
     nilai: ["Kongsilah perasaan kita dengan keluarga atau guru yang kita percayai.", "เล่าความรู้สึกของเราให้ครอบครัวหรือครูที่ไว้ใจฟัง"]
   },
   {
@@ -549,10 +439,6 @@ window.BUKU = {
         ["Sebutan", "ออกเสียงถูกต้องชัดเจน", "4"], ["Kelancaran", "พูดต่อเนื่องไม่ติดขัด", "4"], ["Bahasa badan", "ท่าทางและน้ำเสียงเหมาะสม", "2"]
       ]}
     ],
-    latihan: [
-      { q: ["Tulis dialog pendek (6 baris) untuk situasi pilihan kamu, kemudian lakonkan bersama rakan.", "เขียนบทสนทนาสั้น ๆ 6 บรรทัดตามสถานการณ์ที่เลือก แล้วแสดงกับเพื่อน"], items: [["______________________________________", ""]] }
-    ],
-    jawapan: [["1", "Jawapan bebas / ตอบได้หลากหลาย"]],
     nilai: ["Bercakap dengan sopan membuatkan orang lain senang hati.", "การพูดอย่างสุภาพทำให้ผู้อื่นสบายใจ"]
   },
 
@@ -588,13 +474,6 @@ window.BUKU = {
         ["Menunduk sedikit apabila lalu di hadapan orang tua.", "ก้มตัวเล็กน้อยเมื่อเดินผ่านหน้าผู้ใหญ่"]
       ]}
     ],
-    latihan: [
-      { q: ["Tulis Betul atau Salah.", "เขียน Betul (ถูก) หรือ Salah (ผิด)"],
-        items: [["1) Kita memberi barang dengan tangan kiri. ______", ""], ["2) Kita membuka kasut sebelum masuk ke rumah. ______", ""], ["3) Hari Merdeka Malaysia ialah pada 31 Ogos. ______", ""]] },
-      { q: ["Tulis ucapan yang sesuai.", "เขียนคำอวยพรที่เหมาะสม"], items: [["1) Hari Raya Aidilfitri → ______________________", ""], ["2) Songkran → ______________________", ""]] },
-      { q: ["Nyatakan dua persamaan Hari Raya dan Songkran.", "บอกความเหมือนระหว่างวันรายอกับวันสงกรานต์ 2 ข้อ"], items: [["______________________________________", ""]] }
-    ],
-    jawapan: [["1", "Salah, Betul, Betul"], ["2", "Selamat Hari Raya, maaf zahir dan batin / Selamat Hari Songkran"], ["3", "Contoh: balik kampung, menghormati orang tua / เช่น กลับบ้านเกิด เคารพผู้ใหญ่"]],
     nilai: ["Hormatilah perayaan rakan yang berlainan budaya dan agama.", "ให้เกียรติเทศกาลของเพื่อนที่ต่างวัฒนธรรมและศาสนา"]
   },
   {
@@ -618,13 +497,6 @@ window.BUKU = {
          "ในภาคใต้ของไทย เราก็พบโรตี สะเต๊ะ และข้าวยำได้เช่นกัน"]
       ]}
     ],
-    latihan: [
-      { q: ["Padankan makanan dengan keterangannya.", "จับคู่อาหารกับคำอธิบาย"],
-        items: [["1) ketupat   2) satay   3) roti canai   4) rendang", ""],
-                ["A. Daging dicucuk dan dibakar.  B. Nasi dibungkus dengan daun kelapa.  C. Daging dimasak lama dengan santan dan rempah.  D. Roti leper dimakan dengan kuah kari.", ""]] },
-      { q: ["Tulis dua makanan tradisi yang ada di Malaysia dan di selatan Thailand.", "เขียนอาหารพื้นเมือง 2 อย่างที่พบทั้งในมาเลเซียและภาคใต้ของไทย"], items: [["______________________________________", ""]] }
-    ],
-    jawapan: [["1", "1–B, 2–A, 3–D, 4–C"], ["2", "Contoh: roti canai, satay, nasi kerabu / เช่น โรตี สะเต๊ะ ข้าวยำ"]],
     nilai: ["Makanan tradisi ialah warisan bangsa yang perlu kita kekalkan.", "อาหารพื้นเมืองเป็นมรดกที่เราควรรักษาไว้"]
   },
   {
@@ -643,12 +515,6 @@ window.BUKU = {
       { t: "note", ms: "Dalam loghat Patani, bunyi akhir “-an” sering menjadi “-e” dan “-ah” menjadi “-oh”. Contoh: makan → make, rumah → rumoh.",
         th: "ในภาษาถิ่นปาตานี เสียงท้าย -an มักกลายเป็น -e และ -ah กลายเป็น -oh เช่น makan → make, rumah → rumoh" }
     ],
-    latihan: [
-      { q: ["Tukar ayat loghat kepada bahasa Melayu standard.", "เปลี่ยนประโยคภาษาถิ่นเป็นภาษามลายูมาตรฐาน"],
-        items: [["1) Gi mano? → ______________________", ""], ["2) Make doh? → ______________________", ""], ["3) Gapo ni? → ______________________", ""]] },
-      { q: ["Tanya keluarga kamu tiga perkataan loghat dan tulis maksudnya dalam bahasa standard.", "ถามคนในครอบครัวถึงคำภาษาถิ่น 3 คำ แล้วเขียนคำภาษามาตรฐานที่ตรงกัน"], items: [["______________________________________", ""]] }
-    ],
-    jawapan: [["1", "Pergi ke mana? / Sudah makan? / Apa ini?"], ["2", "Jawapan bebas / ตอบได้หลากหลาย"]],
     nilai: ["Banggalah dengan loghat sendiri, dan kuasailah bahasa Melayu standard.", "ภูมิใจในภาษาถิ่นของตน และฝึกใช้ภาษามลายูมาตรฐานให้คล่อง"]
   },
   {
@@ -678,12 +544,6 @@ window.BUKU = {
          "จระเข้จึงเรียงแถว กระจงกระโดดไปบนหลังจระเข้พลางนับ “หนึ่ง สอง สาม ...” ในที่สุดก็ข้ามไปถึงอีกฝั่ง"]
       ]}
     ],
-    latihan: [
-      { q: ["Jawab soalan berdasarkan cerita.", "ตอบคำถามจากนิทาน"],
-        items: [["1) Mengapakah Sang Kancil hendak ke seberang sungai?", ""], ["2) Mengapakah buaya berbaris?", ""], ["3) Apakah pengajaran cerita ini?", ""]] },
-      { q: ["Baris manakah maksud pantun di atas?", "บรรทัดใดของปันตุนข้างต้นเป็นเนื้อความ"], items: [["______________________________________", ""]] }
-    ],
-    jawapan: [["1", "Untuk makan buah-buahan. / Kerana Sang Kancil kata dia mahu mengira buaya. / Gunakan akal untuk menyelesaikan masalah."], ["2", "Baris 3 dan 4"]],
     nilai: ["Pantun dan cerita rakyat menyimpan nasihat orang tua-tua untuk kita.", "ปันตุนและนิทานพื้นบ้านเก็บคำสอนของคนรุ่นก่อนไว้ให้เรา"]
   },
   {
@@ -713,10 +573,6 @@ window.BUKU = {
         ["Saya boleh menerangkan satu perayaan dan satu makanan Melayu.", "ฉันอธิบายเทศกาลและอาหารมลายูได้อย่างละ 1 อย่าง"]
       ]}
     ],
-    latihan: [
-      { q: ["Tulis rancangan projek kumpulan kamu: tajuk, ahli dan tugas setiap ahli.", "เขียนแผนโครงงานของกลุ่ม: ชื่อเรื่อง สมาชิก และหน้าที่ของแต่ละคน"], items: [["______________________________________", ""]] }
-    ],
-    jawapan: [["1", "Jawapan bebas / ตอบได้หลากหลาย"]],
     nilai: ["Yakin dengan diri sendiri apabila bertutur dalam bahasa Melayu.", "มั่นใจในตนเองเมื่อพูดภาษามลายู"]
   }
   ],
@@ -727,7 +583,6 @@ window.BUKU = {
     "Dewan Bahasa dan Pustaka. (2005). <i>Kamus Dewan</i> (Ed. ke-4).",
     "Nik Safiah Karim, Farid M. Onn, Hashim Haji Musa, &amp; Abdul Hamid Mahmood. (2008). <i>Tatabahasa Dewan</i> (Ed. ke-3). Dewan Bahasa dan Pustaka.",
     "กระทรวงศึกษาธิการ. (2551). <i>หลักสูตรแกนกลางการศึกษาขั้นพื้นฐาน พุทธศักราช 2551</i>. โรงพิมพ์ชุมนุมสหกรณ์การเกษตรแห่งประเทศไทย.",
-    "สำนักงานคณะกรรมการการศึกษาขั้นพื้นฐาน. (ม.ป.ป.). <i>ผลการเรียนรู้และสาระการเรียนรู้ภาษามลายู ระดับชั้นมัธยมศึกษาปีที่ 4–6</i>. สำนักวิชาการและมาตรฐานการศึกษา.",
-    "โรงเรียนหาดใหญ่วิทยาลัยสมบูรณ์กุลกันยา. (2569). <i>คำอธิบายรายวิชาและโครงสร้างรายวิชา ม20273 ภาษาที่ 2 (ภาษามลายู 1)</i> [เอกสารหลักสูตรสถานศึกษา]."
+    "สำนักงานคณะกรรมการการศึกษาขั้นพื้นฐาน. (ม.ป.ป.). <i>ผลการเรียนรู้และสาระการเรียนรู้ภาษามลายู ระดับชั้นมัธยมศึกษาปีที่ 4–6</i>. สำนักวิชาการและมาตรฐานการศึกษา."
   ]
 };

@@ -9,124 +9,205 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=Sarabun:wght@400;600;700&family=Noto+Naskh+Arabic:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=Sarabun:wght@400;600;700&family=Noto+Naskh+Arabic:wght@500;700&family=Noto+Color+Emoji&display=swap">
 <style>
-/* Layout: lembaran buku bertingkat di atas meja; satu lembaran = satu halaman buku, boleh skrol berterusan */
+/* Layout: lembaran buku bertingkat di atas meja; setiap lembaran satu halaman, boleh skrol berterusan; latihan dan audio dalam halaman */
 :root{
   --desk:#E6EAE5; --paper:#FFFEFA; --ink:#1B2620; --muted:#5A6A61; --rule:#D8DFD7;
-  --green:#1F5D40; --green-tint:#EDF4EF; --gold:#9A6F06; --gold-line:#B8860B; --gold-tint:#FBF4E2;
-  --on-green:#FFFEFA; --shadow:0 1px 2px rgba(27,38,32,.08),0 8px 28px rgba(27,38,32,.10);
+  --green:#1F5D40; --green-tint:#EDF4EF; --gold:#8F6705; --gold-line:#B8860B; --gold-tint:#FBF4E2;
+  --on-green:#FFFEFA; --ok:#1E7A45; --ok-tint:#E4F4EA; --bad:#B3261E; --bad-tint:#FCE8E6;
+  --shadow:0 1px 2px rgba(27,38,32,.08),0 8px 28px rgba(27,38,32,.10);
   --f-ms:"Literata",Georgia,"Times New Roman",serif;
   --f-th:"Sarabun","Leelawadee UI","Tahoma",sans-serif;
   --f-jawi:"Noto Naskh Arabic","Traditional Arabic","Times New Roman",serif;
+  --f-emoji:"Noto Color Emoji","Apple Color Emoji","Segoe UI Emoji",sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --desk:#0F1512; --paper:#19211D; --ink:#E5ECE7; --muted:#9BAAA1; --rule:#2D3832;
   --green:#86C9A5; --green-tint:#1F2D27; --gold:#E2B850; --gold-line:#C89B2E; --gold-tint:#2A2517;
-  --on-green:#0F1512; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark }}
+  --on-green:#0F1512; --ok:#7FD39F; --ok-tint:#173023; --bad:#F19A92; --bad-tint:#3A1D1A;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark }}
 :root[data-theme="dark"]{
   --desk:#0F1512; --paper:#19211D; --ink:#E5ECE7; --muted:#9BAAA1; --rule:#2D3832;
   --green:#86C9A5; --green-tint:#1F2D27; --gold:#E2B850; --gold-line:#C89B2E; --gold-tint:#2A2517;
-  --on-green:#0F1512; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark }
+  --on-green:#0F1512; --ok:#7FD39F; --ok-tint:#173023; --bad:#F19A92; --bad-tint:#3A1D1A;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35); color-scheme:dark }
 
 *{box-sizing:border-box}
 body{background:var(--desk);color:var(--ink);font-family:var(--f-th);font-size:17px;line-height:1.65;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--green)}
 a{color:var(--green)}
+button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--gold-line);outline-offset:2px}
+.emo{font-family:var(--f-emoji);font-style:normal;line-height:1}
 
+/* bar */
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));
-  background:var(--green);color:var(--on-green);padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.bar-in{max-width:860px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.bar b{font-family:var(--f-ms);font-weight:600;font-size:15px;flex:1;min-width:0}
-.bar a{color:var(--on-green);font-size:14px;text-decoration:none;border:1px solid currentColor;border-radius:999px;padding:3px 12px;opacity:.9}
-.bar a:hover{opacity:1}
+  background:var(--green);color:var(--on-green);padding-block:8px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar-in{max-width:860px;margin:0 auto;display:flex;align-items:center;gap:8px 12px;flex-wrap:wrap}
+.bar b{font-family:var(--f-ms);font-weight:600;font-size:15px;flex:1 1 180px;min-width:0}
+.pill{color:var(--on-green);background:transparent;font-size:13px;text-decoration:none;border:1px solid currentColor;border-radius:999px;padding:3px 12px;cursor:pointer;line-height:1.4;display:inline-flex;gap:6px;align-items:center}
+.pill[aria-pressed="true"]{background:var(--on-green);color:var(--green)}
 
 .book{max-width:860px;margin:24px auto 0;display:flex;flex-direction:column;gap:28px}
 .sheet{background:var(--paper);box-shadow:var(--shadow);border-radius:3px;padding:clamp(22px,5vw,56px) clamp(18px,6vw,64px) 28px;position:relative;min-width:0;scroll-margin-top:64px}
-.folio{margin-top:36px;padding-top:10px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
-.folio span:first-child{font-family:var(--f-ms);font-style:italic}
+.folio{margin-top:36px;padding-top:10px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.folio > span:first-child{font-family:var(--f-ms);font-style:italic}
+.folio nav{display:flex;gap:8px;flex-wrap:wrap}
+.folio nav a{font-size:13px;text-decoration:none;border:1px solid var(--rule);border-radius:999px;padding:2px 10px}
 
-/* bilingual lines */
+/* bilingual */
 .ms{font-family:var(--f-ms);margin:0}
 .th{font-family:var(--f-th);margin:0;color:var(--muted);font-size:.94em}
-.bi{display:flex;flex-direction:column;gap:1px}
+.bi{display:flex;flex-direction:column;gap:1px;min-width:0}
 .bi + .bi{margin-top:10px}
 .jawi{font-family:var(--f-jawi);direction:rtl;unicode-bidi:isolate}
-
+.ms .jawi{font-size:1.3em}
 h2,h3{text-wrap:balance;margin:0}
+
+/* speaker */
+.say{flex:none;width:30px;height:30px;border-radius:50%;border:1px solid var(--green);background:var(--paper);color:var(--green);display:inline-grid;place-items:center;cursor:pointer;padding:0;vertical-align:middle}
+.say:hover{background:var(--green-tint)}
+.say.playing{background:var(--green);color:var(--on-green)}
+.say svg{width:16px;height:16px}
+.row-say{display:flex;gap:10px;align-items:flex-start}
+.row-say > .bi{flex:1}
+.tool{font-size:13px;border:1px solid var(--green);color:var(--green);background:var(--paper);border-radius:999px;padding:3px 12px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;line-height:1.4}
+.tool:hover{background:var(--green-tint)}
+.tool svg{width:14px;height:14px}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+
 .eyebrow{font-family:var(--f-ms);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);display:flex;flex-direction:column}
 .eyebrow .th{letter-spacing:0;text-transform:none;font-size:13px;color:var(--gold)}
-.ltitle{margin-top:10px;padding-bottom:18px;border-bottom:2px solid var(--green)}
+.ltitle{margin-top:10px;padding-bottom:18px;border-bottom:2px solid var(--green);display:flex;gap:16px;align-items:flex-end;justify-content:space-between}
 .ltitle .ms{font-size:clamp(28px,5vw,38px);font-weight:700;line-height:1.2;color:var(--green)}
 .ltitle .th{font-size:20px;margin-top:4px;color:var(--ink)}
+.ltitle .emo{font-size:clamp(40px,8vw,60px)}
 .sec{margin-top:30px}
-.sec > .bi:first-child .ms{font-size:20px;font-weight:600;color:var(--green)}
-.sec > .bi:first-child .th{font-size:15px}
+.sec > .bi:first-child .ms,.sec > .head .ms{font-size:20px;font-weight:600;color:var(--green)}
+.sec > .bi:first-child .th,.sec > .head .th{font-size:15px}
 .sec > * + *{margin-top:14px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap}
 
 .box{border:1px solid var(--rule);border-radius:6px;padding:16px 18px;background:var(--green-tint)}
 .box .label{font-family:var(--f-ms);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--green)}
 .box .label .th{text-transform:none;letter-spacing:0;font-weight:600;font-size:14px;color:var(--green)}
 .box ul{margin:10px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.box .rows{margin-top:10px;display:flex;flex-direction:column;gap:10px}
 .note{background:var(--gold-tint);border-color:var(--gold-line)}
 .note .label,.note .label .th{color:var(--gold)}
 .nilai{margin-top:30px;border:none;border-left:4px solid var(--gold-line);border-radius:0 6px 6px 0;background:var(--gold-tint)}
 .nilai .label,.nilai .label .th{color:var(--gold)}
 .nilai .ms{font-style:italic}
 
+/* tables */
 .tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:6px}
 table{border-collapse:collapse;width:100%;font-size:16px}
-th,td{padding:8px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule)}
+th,td{padding:8px 12px;text-align:left;vertical-align:middle;border-bottom:1px solid var(--rule)}
 tr:last-child td{border-bottom:none}
 thead th{background:var(--green);color:var(--on-green);font-family:var(--f-ms);font-weight:600;font-size:14px;white-space:nowrap}
 thead th small{display:block;font-family:var(--f-th);font-weight:400;opacity:.85}
 td.n{width:3em;color:var(--muted);font-variant-numeric:tabular-nums}
 td.mscell{font-family:var(--f-ms);font-weight:600}
-td.thcell{color:var(--muted)}
 td.msplain{font-family:var(--f-ms)}
-.ms .jawi{font-size:1.3em}
+td.thcell{color:var(--muted)}
 td .jawi{font-size:22px;line-height:1.4}
 tbody tr:nth-child(even){background:color-mix(in srgb,var(--green-tint) 55%,transparent)}
+.word{all:unset;cursor:pointer;border-bottom:1px dotted var(--green)}
+.word:hover{color:var(--green)}
+.word:focus-visible{outline:2px solid var(--gold-line);outline-offset:2px}
+.tcell{display:flex;gap:10px;align-items:center}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
-.grid div{border:1px solid var(--rule);border-radius:6px;padding:8px 10px;display:flex;align-items:baseline;gap:10px}
+/* vocab cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.card{border:1px solid var(--rule);border-radius:8px;padding:12px 10px 10px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;background:var(--paper);cursor:pointer;min-width:0}
+.card:hover{border-color:var(--green)}
+.card .pic{height:56px;display:grid;place-items:center;font-size:44px}
+.card .pic .sw{width:52px;height:40px;border-radius:6px;border:1px solid var(--rule)}
+.card .pic .mono{width:48px;height:48px;border-radius:50%;background:var(--green-tint);color:var(--green);font-family:var(--f-ms);font-weight:700;font-size:22px;display:grid;place-items:center}
+.card .w{font-family:var(--f-ms);font-weight:600;font-size:17px;line-height:1.3;overflow-wrap:anywhere}
+.card .m{color:var(--muted);font-size:14px;line-height:1.35}
+.cards.hide-th .card:not(.show) .m{visibility:hidden}
+.phrases{display:flex;flex-direction:column;border:1px solid var(--rule);border-radius:8px}
+.phr{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--rule);cursor:pointer}
+.phr:last-child{border-bottom:none}
+.phr .emo{font-size:26px;width:1.3em;text-align:center}
+.phr .w{font-family:var(--f-ms);font-weight:600}
+.phr .m{color:var(--muted);font-size:15px}
+.phrases.hide-th .phr:not(.show) .m{visibility:hidden}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.grid button{border:1px solid var(--rule);border-radius:6px;padding:8px 10px;display:flex;align-items:baseline;gap:10px;background:var(--paper);cursor:pointer;text-align:left}
+.grid button:hover{border-color:var(--green)}
 .grid b{font-variant-numeric:tabular-nums;color:var(--green);font-size:20px;min-width:1.6em}
 .grid span{font-family:var(--f-ms)}
 .jgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:6px;direction:rtl}
-.jgrid div{border:1px solid var(--rule);border-radius:6px;padding:6px 4px 4px;text-align:center;direction:ltr}
+.jgrid button{border:1px solid var(--rule);border-radius:6px;padding:6px 4px 4px;text-align:center;direction:ltr;background:var(--paper);cursor:pointer}
+.jgrid button:hover{border-color:var(--green)}
 .jgrid .jawi{display:block;font-size:30px;line-height:1.3;color:var(--green)}
 .jgrid small{font-family:var(--f-ms);font-size:13px;color:var(--muted)}
 
-.dialog{display:flex;flex-direction:column;gap:10px}
-.dl{display:grid;grid-template-columns:7.5em 1fr;gap:12px}
-.dl .who{font-family:var(--f-ms);font-weight:600;color:var(--green);text-align:right}
-@media (max-width:520px){.dl{grid-template-columns:1fr;gap:0}.dl .who{text-align:left}}
+/* dialog */
+.dialog{display:flex;flex-direction:column;gap:12px}
+.dl{display:grid;grid-template-columns:40px 1fr auto;gap:12px;align-items:start}
+.av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-ms);font-weight:700;color:#fff;font-size:15px}
+.dl .who{font-family:var(--f-ms);font-weight:600;color:var(--green);font-size:14px}
+.dl.on{background:var(--green-tint);border-radius:8px;box-shadow:0 0 0 6px var(--green-tint)}
 
-.reading{border:1px solid var(--rule);border-radius:6px;padding:18px 20px}
-.reading h4{margin:0 0 10px;font-family:var(--f-ms);font-size:19px;text-align:center;color:var(--green)}
-.poem{padding:16px 20px;border:1px solid var(--rule);border-radius:6px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.reading{border:1px solid var(--rule);border-radius:8px;padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+.reading .rh{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.reading h4{margin:0;font-family:var(--f-ms);font-size:20px;color:var(--green);display:flex;gap:12px;align-items:center}
+.reading h4 .emo{font-size:36px}
+.poem{padding:16px 20px;border:1px solid var(--rule);border-radius:8px;display:flex;flex-direction:column;gap:10px}
 .poem .ms{font-style:italic;font-size:18px}
 
 ol.steps{margin:0;padding-left:24px;display:flex;flex-direction:column;gap:10px}
 ul.check{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
-ul.check li{display:grid;grid-template-columns:22px 1fr;gap:10px}
-ul.check li::before{content:"";width:18px;height:18px;margin-top:4px;border:2px solid var(--green);border-radius:4px}
+ul.check label{display:grid;grid-template-columns:22px 1fr;gap:10px;cursor:pointer}
+ul.check input{width:18px;height:18px;margin-top:5px;accent-color:var(--green)}
 
-.lat{counter-reset:q;display:flex;flex-direction:column;gap:18px}
+/* latihan */
+.lat{display:flex;flex-direction:column;gap:22px}
 .q{display:grid;grid-template-columns:2em 1fr;gap:4px 8px}
 .q > .num{font-family:var(--f-ms);font-weight:700;color:var(--green);font-size:18px}
-.q .items{grid-column:2;display:flex;flex-direction:column;gap:8px;margin-top:6px}
-.q .items .ms{white-space:pre-wrap;overflow-wrap:anywhere}
+.q .items{grid-column:2;display:flex;flex-direction:column;gap:12px;margin-top:8px;min-width:0}
+.item{display:flex;gap:10px;align-items:flex-start;min-width:0}
+.item > .ipic{font-size:28px;width:1.3em;text-align:center;flex:none}
+.item > .bi{flex:1}
+.item .ms{line-height:2.1;overflow-wrap:anywhere}
+.blank{font:inherit;font-family:var(--f-ms);border:none;border-bottom:2px solid var(--green);background:var(--green-tint);color:var(--ink);padding:0 6px;border-radius:4px 4px 0 0;max-width:100%;min-width:3ch}
+.blank.ok{border-color:var(--ok);background:var(--ok-tint)}
+.blank.bad{border-color:var(--bad);background:var(--bad-tint)}
+.opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.opt{border:1px solid var(--rule);border-radius:999px;padding:4px 14px;background:var(--paper);cursor:pointer;line-height:1.5;text-align:left}
+.opt.ms-o{font-family:var(--f-ms)}
+.opt[aria-pressed="true"]{border-color:var(--green);background:var(--green-tint);font-weight:600}
+.opt.ok{border-color:var(--ok);background:var(--ok-tint);color:var(--ok)}
+.opt.bad{border-color:var(--bad);background:var(--bad-tint);color:var(--bad)}
+.order{display:flex;flex-direction:column;gap:8px;width:100%}
+.tray,.built{display:flex;gap:6px;flex-wrap:wrap;min-height:40px;padding:6px;border-radius:6px}
+.tray{background:var(--desk)}
+.built{border:2px dashed var(--rule)}
+.built.ok{border-color:var(--ok);background:var(--ok-tint)}
+.built.bad{border-color:var(--bad);background:var(--bad-tint)}
+.chip{font-family:var(--f-ms);border:1px solid var(--green);background:var(--paper);border-radius:6px;padding:3px 10px;cursor:pointer}
+.open textarea{width:100%;min-height:90px;font:inherit;font-family:var(--f-ms);border:1px solid var(--rule);border-radius:6px;padding:8px 10px;background:var(--paper);color:var(--ink);resize:vertical}
+details.model{margin-top:6px;font-size:15px}
+details.model summary{cursor:pointer;color:var(--green)}
+.clock{flex:none}
+.latbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px;padding-top:14px;border-top:1px dashed var(--rule)}
+.btn{border:none;background:var(--green);color:var(--on-green);border-radius:6px;padding:8px 16px;cursor:pointer;line-height:1.3;text-align:left}
+.btn.ghost{background:transparent;color:var(--green);border:1px solid var(--green)}
+.btn small{display:block;font-size:12px;opacity:.85}
+.score{font-family:var(--f-ms);font-weight:700;font-size:18px;color:var(--green);font-variant-numeric:tabular-nums}
+.ans{font-size:14px;color:var(--ok);font-family:var(--f-ms)}
 
 .pdf{position:absolute;top:18px;right:18px;font:inherit;font-size:13px;background:var(--paper);color:var(--green);border:1px solid var(--green);border-radius:999px;padding:4px 12px;cursor:pointer;line-height:1.3;text-align:center}
-.pdf:hover{background:var(--green-tint)}
 .pdf span{display:block}
 
 /* cover */
-.cover{text-align:center;padding-block:clamp(40px,9vw,90px);background:
-  linear-gradient(var(--paper),var(--paper)) padding-box;border-top:10px solid var(--green)}
+.cover{text-align:center;padding-block:clamp(40px,9vw,90px);border-top:10px solid var(--green)}
 .cover .jawi{font-size:clamp(28px,6vw,40px);color:var(--gold);display:block;margin-top:8px}
 .cover h1{font-family:var(--f-ms);font-size:clamp(34px,7vw,56px);line-height:1.1;color:var(--green);margin:0;text-wrap:balance}
 .cover .sub{font-size:22px;color:var(--ink);margin-top:6px}
@@ -134,31 +215,43 @@ ul.check li::before{content:"";width:18px;height:18px;margin-top:4px;border:2px 
 .cover .meta{display:flex;flex-direction:column;gap:14px;align-items:center}
 .cover .by{margin-top:36px}
 .cover .by .ms{font-weight:600}
+.cover .art{font-size:clamp(34px,7vw,52px);letter-spacing:.2em;margin:24px 0 0}
+
+.howto{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.howto > div{border:1px solid var(--rule);border-radius:8px;padding:12px 14px;display:flex;gap:12px;align-items:flex-start}
+.howto .ic{flex:none;width:34px;height:34px;border-radius:50%;background:var(--green-tint);color:var(--green);display:grid;place-items:center}
+.howto .ic svg{width:18px;height:18px}
+#suara{font-size:15px}
 
 .toc{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:22px}
 .toc h3 .ms{font-size:19px;color:var(--green)}
 .toc ol{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column}
-.toc ol li a{display:grid;grid-template-columns:2.4em 1fr auto;gap:8px;padding:8px 0;border-bottom:1px dotted var(--rule);text-decoration:none;color:var(--ink)}
+.toc ol li a{display:grid;grid-template-columns:2.4em 1fr auto;gap:8px;align-items:center;padding:8px 0;border-bottom:1px dotted var(--rule);text-decoration:none;color:var(--ink)}
 .toc .no{font-family:var(--f-ms);color:var(--gold);font-variant-numeric:tabular-nums}
-.toc .pg{color:var(--muted);font-variant-numeric:tabular-nums;font-size:14px}
+.toc .pg{color:var(--muted);font-variant-numeric:tabular-nums;font-size:14px;text-align:right}
+.toc .done{display:block;color:var(--ok);font-size:12px}
 
 .unitsheet{display:flex;flex-direction:column;justify-content:center;min-height:min(420px,70vh);background:var(--green);color:var(--on-green)}
 .unitsheet .ms,.unitsheet .th{color:var(--on-green)}
 .unitsheet .big{font-family:var(--f-ms);font-size:clamp(64px,14vw,120px);line-height:1;font-weight:700;opacity:.3}
 .unitsheet h2 .ms{font-size:clamp(30px,6vw,46px)}
 .unitsheet h2 .th{font-size:22px;opacity:.9}
-.unitsheet .folio{border-color:color-mix(in srgb,var(--on-green) 30%,transparent);color:var(--on-green);opacity:.8}
+.unitsheet .emos{font-size:clamp(30px,6vw,42px);margin-top:22px;letter-spacing:.15em}
+.unitsheet .folio{border-color:color-mix(in srgb,var(--on-green) 30%,transparent);color:var(--on-green)}
+.unitsheet .folio nav a{color:var(--on-green);border-color:color-mix(in srgb,var(--on-green) 40%,transparent)}
 
 .refs{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
 .refs li{padding-left:2em;text-indent:-2em;overflow-wrap:anywhere}
 
+@media (max-width:520px){.dl{grid-template-columns:34px 1fr auto;gap:8px}.av{width:34px;height:34px;font-size:13px}.ltitle .emo{display:none}}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 @media print{
   body{background:#fff;padding:0}
-  body::before,.bar,.pdf{display:none!important}
+  body::before,.bar,.pdf,.say,.tool,.latbar,.folio nav{display:none!important}
   .book{margin:0;gap:0;max-width:none}
   .sheet{box-shadow:none;border-radius:0;page-break-after:always}
   body.print-one .sheet:not(.print-target){display:none}
+  .cards.hide-th .card .m{visibility:visible}
 }
 </style>
 </head>
@@ -167,38 +260,58 @@ ul.check li::before{content:"";width:18px;height:18px;margin-top:4px;border:2px 
 
 <header class="bar"><div class="bar-in">
   <b>Buku Teks Bahasa Melayu 1</b>
-  <a href="#kandungan">Kandungan · สารบัญ</a>
+  <button class="pill" id="laju" type="button" aria-pressed="false" title="Kelajuan suara · ความเร็วเสียง">Suara perlahan · เสียงช้า</button>
+  <a class="pill" href="#kandungan">Kandungan · สารบัญ</a>
 </div></header>
 <main class="book" id="book"></main>
 
 <script src="data.js"></script>
+<script src="latihan.js"></script>
 <script>
 (function(){
-  const B = window.BUKU;
-  const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  const B = window.BUKU, L = window.LATIHAN || {}, G = window.GAMBAR || {}, W = window.WARNA || {}, GB = window.GAMBAR_BACAAN || {}, AU = window.AUDIO || {};
+  const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
   const isThai = s => /[฀-๿]/.test(s);
-  const msx = s => esc(s).replace(/([\u0600-\u06FF\u0750-\u077F]+)/g,'<bdi class="jawi" lang="ms-Arab">$1</bdi>');
-  const bi = (ms, th, tag="p") => `<div class="bi">${ms?`<${tag} class="ms">${msx(ms)}</${tag}>`:""}${th?`<${tag} class="th">${esc(th)}</${tag}>`:""}</div>`;
+  const hasJawi = s => /[؀-ۿݐ-ݿ]/.test(s);
+  const msx = s => esc(s).replace(/([؀-ۿݐ-ݿ]+)/g,'<bdi class="jawi" lang="ms-Arab">$1</bdi>');
+  const bi = (ms, th, tag="p") => `<div class="bi">${ms?`<${tag} class="ms" lang="ms">${msx(ms)}</${tag}>`:""}${th?`<${tag} class="th" lang="th">${esc(th)}</${tag}>`:""}</div>`;
   const hd = (ms, th) => `<th>${esc(ms)}<small>${esc(th)}</small></th>`;
+  const emo = (e, cls="") => `<span class="emo ${cls}" aria-hidden="true">${e}</span>`;
+  const ICON_SAY = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+  const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8z"/></svg>';
+  const ICON_EYE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+  const ICON_PEN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>';
+  const sayClean = s => String(s).replace(/\[\[(.*?)\]\]/g,(m,a)=>a.split("|")[0]).replace(/[؀-ۿݐ-ݿ฀-๿]+/g,"").replace(/_{2,}/g," ").replace(/[→↔+]/g,", ").replace(/\.\.\./g,", ").replace(/\s+/g," ").trim();
+  const sayBtn = (text, label="Dengar") => `<button class="say" type="button" data-say="${esc(sayClean(text))}" aria-label="${label}: ${esc(sayClean(text))}">${ICON_SAY}</button>`;
   const inIframe = (()=>{ try { return window.self !== window.top } catch(e){ return true } })();
-  let page = 0;
-  const folio = (ms) => `<footer class="folio"><span>${esc(ms)}</span><span>${++page}</span></footer>`;
-  const out = [];
+  const store = { get(k){ try{ return localStorage.getItem(k) }catch(e){ return null } }, set(k,v){ try{ localStorage.setItem(k,v) }catch(e){} } };
 
-  /* cover */
+  function clockSVG(t, size=46){
+    const [h,m] = t.split(":").map(Number);
+    const ma = m*6, ha = (h%12)*30 + m*0.5;
+    const hand = (ang,len,w) => { const r=ang*Math.PI/180; return `<line x1="24" y1="24" x2="${(24+len*Math.sin(r)).toFixed(1)}" y2="${(24-len*Math.cos(r)).toFixed(1)}" stroke="currentColor" stroke-width="${w}" stroke-linecap="round"/>`; };
+    let ticks=""; for(let i=0;i<12;i++){const r=i*30*Math.PI/180; ticks+=`<line x1="${(24+17*Math.sin(r)).toFixed(1)}" y1="${(24-17*Math.cos(r)).toFixed(1)}" x2="${(24+20*Math.sin(r)).toFixed(1)}" y2="${(24-20*Math.cos(r)).toFixed(1)}" stroke="currentColor" stroke-width="${i%3?1:2}"/>`;}
+    return `<svg class="clock" width="${size}" height="${size}" viewBox="0 0 48 48" role="img" aria-label="${t}" style="color:var(--green)"><circle cx="24" cy="24" r="22" fill="var(--paper)" stroke="currentColor" stroke-width="2"/>${ticks}${hand(ha,11,3)}${hand(ma,16,2)}<circle cx="24" cy="24" r="2" fill="currentColor"/></svg>`;
+  }
+  const avColors = ["#1F5D40","#9A6F06","#3E5C9A","#8E3B5A","#2F7D7A","#6B4FA0"];
+  const avColor = name => { let h=0; for(const c of name) h=(h*31+c.charCodeAt(0))>>>0; return avColors[h%avColors.length]; };
+
+  let page = 0;
+  const out = [];
+  const folio = (ms, nav="") => `<footer class="folio"><span>${esc(ms)}</span>${nav}<span>${++page}</span></footer>`;
+
+  /* ---------- kulit ---------- */
   out.push(`<section class="sheet cover" id="kulit">
-    <div class="meta">
-      ${bi("Buku Teks Bahasa Melayu 1","หนังสือเรียนภาษามลายู 1")}
-    </div>
+    <div class="meta">${bi("Buku Teks Bahasa Melayu 1","หนังสือเรียนภาษามลายู 1")}</div>
     <span class="jawi" lang="ms-Arab">بوکو تيکس بهاس ملايو</span>
     <div class="rule"></div>
     <h1>Bahasa Melayu 1</h1>
     <p class="th sub">รายวิชา ม20273 ภาษาที่ 2 (ภาษามลายู 1)</p>
+    <p class="art">${emo("👋")} ${emo("👨‍👩‍👧")} ${emo("🏫")} ${emo("🍛")} ${emo("🌙")}</p>
     <div class="rule"></div>
     <div class="meta">
       ${bi("Tingkatan 1 · Semester 2 · 40 jam · 1.0 kredit","ชั้นมัธยมศึกษาปีที่ 1 ภาคเรียนที่ 2 · 40 ชั่วโมง · 1.0 หน่วยกิต")}
       ${bi("Bidang Pembelajaran Bahasa Asing","กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ")}
-      ${bi("Sekolah Hatyaiwittayalai Somboonkulkanya, Songkhla","โรงเรียนหาดใหญ่วิทยาลัยสมบูรณ์กุลกันยา จังหวัดสงขลา")}
     </div>
     <div class="meta by">
       ${bi("Disusun oleh","เรียบเรียงโดย")}
@@ -207,22 +320,32 @@ ul.check li::before{content:"";width:18px;height:18px;margin-top:4px;border:2px 
     </div>
   </section>`);
 
-  /* prakata */
+  /* ---------- prakata + cara guna ---------- */
   out.push(`<section class="sheet" id="prakata">
     <div class="ltitle">${bi("Prakata","คำนำ","h2")}</div>
     <div class="sec">
-      ${bi("Buku ini disediakan untuk murid Tingkatan 1, Semester 2, yang mempelajari bahasa Melayu sebagai bahasa kedua. Kandungannya mengikut huraian kursus dan struktur kursus sekolah.",
-           "หนังสือเล่มนี้จัดทำขึ้นสำหรับนักเรียนชั้นมัธยมศึกษาปีที่ 1 ภาคเรียนที่ 2 ที่เรียนภาษามลายูเป็นภาษาที่สอง เนื้อหาเป็นไปตามคำอธิบายรายวิชาและโครงสร้างรายวิชาของโรงเรียน")}
-      ${bi("Buku ini mempunyai 4 unit dan 20 pelajaran: Asas Komunikasi, Sekitar Saya, Aktiviti dan Rutin, serta Budaya dan Loghat. Setiap pelajaran mengandungi objektif, kosa kata, dialog atau bacaan, pola ayat, latihan dan nilai murni.",
-           "หนังสือแบ่งเป็น 4 หน่วย 20 บท ได้แก่ พื้นฐานการสื่อสาร รอบตัวฉัน กิจกรรมและชีวิตประจำวัน และวัฒนธรรมและภาษาถิ่น ทุกบทมีจุดประสงค์ คำศัพท์ บทสนทนาหรือบทอ่าน รูปประโยค แบบฝึกหัด และข้อคิด")}
+      ${bi("Buku ini disediakan untuk murid Tingkatan 1 yang mempelajari bahasa Melayu sebagai bahasa asing. Buku ini sesuai digunakan oleh mana-mana sekolah yang mengajarkan kursus Bahasa Melayu 1.",
+           "หนังสือเล่มนี้จัดทำขึ้นสำหรับนักเรียนชั้นมัธยมศึกษาปีที่ 1 ที่เรียนภาษามลายูในฐานะภาษาต่างประเทศ โรงเรียนที่เปิดสอนรายวิชาภาษามลายู 1 สามารถนำไปใช้ได้")}
+      ${bi("Buku ini mempunyai 4 unit dan 20 pelajaran. Setiap pelajaran mengandungi objektif, kosa kata bergambar, dialog atau bacaan, pola ayat, latihan interaktif dan nilai murni. Semua teks bahasa Melayu boleh didengar.",
+           "หนังสือแบ่งเป็น 4 หน่วย 20 บท ทุกบทมีจุดประสงค์ คำศัพท์พร้อมภาพ บทสนทนาหรือบทอ่าน รูปประโยค แบบฝึกหัดแบบโต้ตอบ และข้อคิด ข้อความภาษามลายูทุกส่วนกดฟังเสียงได้")}
       ${bi("Bahasa dalam buku ini ialah bahasa Melayu standard. Glosari, jawapan latihan dan rujukan terdapat di bahagian akhir buku.",
            "ภาษาที่ใช้ในหนังสือเล่มนี้เป็นภาษามลายูมาตรฐาน ท้ายเล่มมีอภิธานศัพท์ เฉลยแบบฝึกหัด และบรรณานุกรม")}
       ${bi("Asst. Prof. Muhammad Salaebing","ผศ.มูหำหมัด สาแลบิง")}
     </div>
+    <div class="sec">
+      <div class="head">${bi("Cara menggunakan buku ini","วิธีใช้หนังสือเล่มนี้","h3")}</div>
+      <div class="howto">
+        <div><span class="ic">${ICON_SAY}</span>${bi("Tekan butang ini untuk mendengar sebutan.","กดปุ่มนี้เพื่อฟังการออกเสียง")}</div>
+        <div><span class="ic">${ICON_PLAY}</span>${bi("Dengar seluruh dialog atau bacaan.","ฟังบทสนทนาหรือบทอ่านทั้งเรื่อง")}</div>
+        <div><span class="ic">${ICON_EYE}</span>${bi("Sembunyikan maksud dan uji ingatan kamu.","ซ่อนความหมายแล้วทดสอบความจำ")}</div>
+        <div><span class="ic">${ICON_PEN}</span>${bi("Buat latihan, kemudian tekan Semak.","ทำแบบฝึกหัด แล้วกดตรวจคำตอบ")}</div>
+      </div>
+      <div class="box note" id="suara-box"><div class="label">${bi("Suara","เสียง")}</div><div id="suara" style="margin-top:8px"></div></div>
+    </div>
     ${folio("Prakata")}
   </section>`);
 
-  /* hasil pembelajaran */
+  /* ---------- hasil pembelajaran ---------- */
   out.push(`<section class="sheet" id="hasil">
     <div class="ltitle">${bi("Hasil Pembelajaran","ผลการเรียนรู้","h2")}</div>
     <div class="sec">
@@ -236,103 +359,177 @@ ul.check li::before{content:"";width:18px;height:18px;margin-top:4px;border:2px 
     ${folio("Hasil Pembelajaran")}
   </section>`);
 
-  /* kandungan: pages computed after layout counting */
-  const tocIndex = out.length; out.push("");
-  page++; // kandungan page number reserved
-  const tocPage = page;
-
+  const tocIndex = out.length; out.push(""); page++; const tocPage = page;
   const lessonPage = {};
   const lessonsByUnit = u => B.lessons.filter(l=>l.unit===u.no);
-  let pelNo = 0;
   const gloss = [];
+  let uid = 0;
 
+  /* ---------- blok kandungan ---------- */
+  const picFor = w => {
+    if (W[w]) return `<span class="sw" style="background:${W[w]}"></span>`;
+    const g = G[w];
+    if (g && /^\d$/.test(g)) return `<span class="mono">${g}</span>`;
+    if (g) return emo(g);
+    return `<span class="mono">${esc(w.trim().charAt(0).toUpperCase())}</span>`;
+  };
+  const vocab = b => {
+    b.rows.forEach(r=>gloss.push(r));
+    const id = "v"+(++uid);
+    const isPhrase = b.rows.filter(r=>/[.?!]$|\.\.\.| /.test(r[0]) && !G[r[0]] && !W[r[0]]).length > b.rows.length/2 || b.rows.some(r=>/[.?!]$/.test(r[0]));
+    const tools = `<div class="tools"><button class="tool" type="button" data-hide="${id}" aria-pressed="false">${ICON_EYE}<span>Sembunyi maksud · ซ่อนความหมาย</span></button></div>`;
+    if (isPhrase) return tools + `<div class="phrases" id="${id}">${b.rows.map(r=>`<div class="phr" data-say-row="${esc(sayClean(r[0]))}">${G[r[0]]?emo(G[r[0]]):`<span></span>`}<div><div class="w" lang="ms">${esc(r[0])}</div><div class="m" lang="th">${esc(r[1])}</div></div>${sayBtn(r[0])}</div>`).join("")}</div>`;
+    return tools + `<div class="cards" id="${id}">${b.rows.map(r=>`<div class="card" data-say-row="${esc(sayClean(r[0]))}"><div class="pic">${picFor(r[0])}</div><div class="w" lang="ms">${esc(r[0])}</div><div class="m" lang="th">${esc(r[1])}</div>${sayBtn(r[0])}</div>`).join("")}</div>`;
+  };
+  const tableCell = (b, c, i) => {
+    if (b.jawiCol!==undefined && i===0) return `<td><span class="jawi" lang="ms-Arab">${esc(c)}</span></td>`;
+    if (isThai(c)) return `<td class="thcell">${esc(c)}</td>`;
+    if (/^\d{1,2}:\d{2}$/.test(c)) return `<td><div class="tcell">${clockSVG(c,40)}<span>${c}</span></div></td>`;
+    if (/^\d$/.test(c) || ["4","3","2","1"].includes(c)) return `<td class="n">${c}</td>`;
+    const m = c.match(/^(.*?)\s{2}(\S+)$/);
+    if (m && hasJawi(m[2])) return `<td class="mscell"><button class="word" type="button" data-say="${esc(m[1])}">${esc(m[1])}</button> <span class="jawi" lang="ms-Arab">${esc(m[2])}</span></td>`;
+    if (/^\/.*\/$/.test(c)) return `<td>${esc(c)}</td>`;
+    return `<td class="${i===0?'mscell':'msplain'}"><button class="word" type="button" data-say="${esc(sayClean(c))}" lang="ms">${esc(c)}</button></td>`;
+  };
   const block = b => {
     switch(b.t){
-      case "h": return bi(b.ms,b.th,"h3");
-      case "p": return bi(b.ms,b.th);
+      case "h": return `<div class="head">${bi(b.ms,b.th,"h3")}</div>`;
+      case "p": return `<div class="row-say">${bi(b.ms,b.th)}${sayBtn(b.ms)}</div>`;
       case "note": return `<div class="box note"><div class="label">${bi("Info","ควรรู้")}</div><div style="margin-top:8px">${bi(b.ms,b.th)}</div></div>`;
-      case "vocab":
-        b.rows.forEach(r=>gloss.push(r));
-        return `<div class="tbl"><table><thead><tr>${hd("Bil.","ที่")}${hd("Bahasa Melayu","ภาษามลายู")}${hd("Maksud","ความหมาย")}</tr></thead><tbody>
-          ${b.rows.map((r,i)=>`<tr><td class="n">${i+1}</td><td class="mscell">${esc(r[0])}</td><td class="thcell">${esc(r[1])}</td></tr>`).join("")}</tbody></table></div>`;
-      case "table":
-        return `<div class="tbl"><table><thead><tr>${b.head.map(h=>hd(h[0],h[1])).join("")}</tr></thead><tbody>
-          ${b.rows.map(r=>`<tr>${r.map((c,i)=>{
-            if(b.jawiCol!==undefined && i===0) return `<td><span class="jawi" lang="ms-Arab">${esc(c)}</span></td>`;
-            if(isThai(c)) return `<td class="thcell">${esc(c)}</td>`;
-            const m = c.match(/^(.*?)\s{2}(\S+)$/); // "cawan  چاون"
-            if(m && /[؀-ۿ]/.test(m[2])) return `<td class="mscell">${esc(m[1])} <span class="jawi" lang="ms-Arab">${esc(m[2])}</span></td>`;
-            return `<td class="${i===0?'mscell':'msplain'}">${esc(c)}</td>`;}).join("")}</tr>`).join("")}</tbody></table></div>`;
-      case "grid": return `<div class="grid">${b.cells.map(c=>`<div><b>${c[0]}</b><span>${esc(c[1])}</span></div>`).join("")}</div>`;
-      case "jawi": return `<div class="jgrid">${b.cells.map(c=>`<div><span class="jawi" lang="ms-Arab">${c[0]}</span><small>${esc(c[1])}</small></div>`).join("")}</div>`;
-      case "dialog": return `<div class="dialog">${b.lines.map(l=>`<div class="dl"><span class="who">${esc(l[0])} :</span>${bi(l[1],l[2])}</div>`).join("")}</div>`;
-      case "pola": return `<div class="box"><div class="label">${bi("Pola ayat","รูปประโยค")}</div><div style="margin-top:10px">${b.rows.map(r=>bi(r[0],r[1])).join("")}</div></div>`;
-      case "reading": return `<div class="reading"><h4>${esc(b.title)}</h4>${b.paras.map(p=>bi(p[0],p[1])).join("")}</div>`;
-      case "poem": return `<div class="poem">${b.lines.map(l=>bi(l[0],l[1])).join("")}</div>`;
+      case "vocab": return vocab(b);
+      case "table": return `<div class="tbl"><table><thead><tr>${b.head.map(h=>hd(h[0],h[1])).join("")}</tr></thead><tbody>${b.rows.map(r=>`<tr>${r.map((c,i)=>tableCell(b,c,i)).join("")}</tr>`).join("")}</tbody></table></div>`;
+      case "grid": return `<div class="grid">${b.cells.map(c=>`<button type="button" data-say="${esc(c[1])}"><b>${c[0]}</b><span lang="ms">${esc(c[1])}</span></button>`).join("")}</div>`;
+      case "jawi": return `<div class="jgrid">${b.cells.map(c=>`<button type="button" data-say="${esc(c[1])}"><span class="jawi" lang="ms-Arab">${c[0]}</span><small>${esc(c[1])}</small></button>`).join("")}</div>`;
+      case "dialog": {
+        const id = "d"+(++uid);
+        return `<div class="tools"><button class="tool" type="button" data-playall="${id}">${ICON_PLAY}<span>Dengar dialog · ฟังทั้งบท</span></button></div>
+          <div class="dialog" id="${id}">${b.lines.map(l=>`<div class="dl" data-who="${esc(l[0])}" data-line="${esc(sayClean(l[1]))}"><span class="av" style="background:${avColor(l[0])}" aria-hidden="true">${esc(l[0].slice(0,2))}</span><div><div class="who">${esc(l[0])}</div>${bi(l[1],l[2])}</div>${sayBtn(l[1])}</div>`).join("")}</div>`;
+      }
+      case "pola": return `<div class="box"><div class="label">${bi("Pola ayat","รูปประโยค")}</div><div class="rows">${b.rows.map(r=>{const ex = r[0].includes("→") ? r[0].split("→").pop() : r[0]; return `<div class="row-say">${bi(r[0],r[1])}${sayBtn(ex)}</div>`;}).join("")}</div></div>`;
+      case "reading": {
+        const id = "r"+(++uid);
+        return `<div class="reading" id="${id}"><div class="rh"><h4>${GB[b.title]?emo(GB[b.title]):""}<span lang="ms">${esc(b.title)}</span></h4><button class="tool" type="button" data-playall="${id}">${ICON_PLAY}<span>Dengar bacaan · ฟังทั้งเรื่อง</span></button></div>
+          ${b.paras.map(p=>`<div class="row-say dl-like" data-line="${esc(sayClean(p[0]))}">${bi(p[0],p[1])}${sayBtn(p[0])}</div>`).join("")}</div>`;
+      }
+      case "poem": {
+        const id = "r"+(++uid);
+        return `<div class="poem" id="${id}"><div class="tools"><button class="tool" type="button" data-playall="${id}">${ICON_PLAY}<span>Dengar pantun · ฟังปันตุน</span></button></div>${b.lines.map(l=>`<div class="row-say" data-line="${esc(sayClean(l[0]))}">${bi(l[0],l[1])}${sayBtn(l[0])}</div>`).join("")}</div>`;
+      }
       case "steps": return `<ol class="steps">${b.rows.map(r=>`<li>${bi(r[0],r[1])}</li>`).join("")}</ol>`;
-      case "check": return `<ul class="check">${b.rows.map(r=>`<li>${bi(r[0],r[1])}</li>`).join("")}</ul>`;
+      case "check": { const id="c"+(++uid); return `<ul class="check">${b.rows.map((r,i)=>`<li><label><input type="checkbox" id="${id}-${i}">${bi(r[0],r[1])}</label></li>`).join("")}</ul>`; }
     }
     return "";
   };
 
+  /* ---------- latihan interaktif ---------- */
+  const seededShuffle = (arr, seed) => {
+    const a = arr.slice(); let s = seed;
+    for (let i=a.length-1;i>0;i--){ s=(s*9301+49297)%233280; const j=Math.floor(s/233280*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+    if (a.join("|")===arr.join("|") && a.length>1) a.push(a.shift());
+    return a;
+  };
+  const fillLine = (ms, qid) => {
+    let k = 0;
+    return msx(ms).replace(/\[\[(.*?)\]\]/g, (m, ans) => {
+      const alts = ans.split("|");
+      const w = Math.max(4, Math.min(28, Math.max(...alts.map(a=>a.length)) + 2));
+      return `<input class="blank" type="text" id="${qid}-b${k++}" size="${w}" autocomplete="off" autocapitalize="off" spellcheck="false" data-ans="${esc(JSON.stringify(alts))}" aria-label="Jawapan · คำตอบ">`;
+    });
+  };
+  const latihanHTML = l => {
+    const qs = L[l.id] || [];
+    return `<div class="lat" data-lesson="${l.id}">${qs.map((q,qi)=>{
+      const qid = `${l.id}-q${qi}`;
+      let body = "";
+      if (q.type==="fill") body = q.items.map((it,ii)=>`<div class="item">${it.pic?`<span class="ipic">${emo(it.pic)}</span>`:""}<div class="bi"><p class="ms" lang="ms">${fillLine(it.ms, qid+"-"+ii)}</p>${it.th?`<p class="th" lang="th">${esc(it.th)}</p>`:""}</div></div>`).join("");
+      if (q.type==="mcq") body = q.items.map((it,ii)=>`<div class="item mcq" data-a="${esc(JSON.stringify([].concat(it.a)))}">${it.clock?clockSVG(it.clock,52):""}<div class="bi">${hasJawi(it.ms)&&it.ms.length<3?`<p class="ms"><span class="jawi" lang="ms-Arab" style="font-size:34px">${esc(it.ms)}</span></p>`:`<p class="ms" lang="ms">${msx(it.ms)}</p>`}${it.th?`<p class="th" lang="th">${esc(it.th)}</p>`:""}
+          <div class="opts" role="group">${it.opts.map((o,oi)=>`<button class="opt ${isThai(o)?"":"ms-o"}" type="button" aria-pressed="false" data-i="${oi}">${esc(o)}</button>`).join("")}</div></div></div>`).join("");
+      if (q.type==="order") body = q.items.map((it,ii)=>{ const sh = seededShuffle(it.a, (qi+1)*31+(ii+1)*17+l.no); return `<div class="item"><div class="order" data-a="${esc(JSON.stringify(it.a))}"><div class="built" aria-label="Ayat kamu · ประโยคของเธอ"></div><div class="tray">${sh.map(w=>`<button class="chip" type="button">${esc(w)}</button>`).join("")}</div></div></div>`; }).join("");
+      if (q.type==="open") body = `<div class="item open"><div class="bi" style="width:100%"><textarea id="${qid}-t" aria-label="Jawapan · คำตอบ"></textarea><details class="model"><summary>Contoh jawapan · ตัวอย่างคำตอบ</summary><p class="ms" lang="ms">${esc(q.model||"")}</p></details></div></div>`;
+      return `<div class="q" data-type="${q.type}"><span class="num">${qi+1}.</span>${bi(q.q[0],q.q[1])}<div class="items">${body}</div></div>`;
+    }).join("")}</div>
+    ${qs.some(q=>q.type!=="open")?`<div class="latbar">
+      <button class="btn" type="button" data-check="${l.id}">Semak jawapan<small>ตรวจคำตอบ</small></button>
+      <button class="btn ghost" type="button" data-show="${l.id}">Tunjuk jawapan<small>ดูเฉลย</small></button>
+      <button class="btn ghost" type="button" data-reset="${l.id}">Cuba lagi<small>ลองใหม่</small></button>
+      <span class="score" id="score-${l.id}" aria-live="polite"></span></div>`:""}`;
+  };
+
   const pdfBtn = id => inIframe ? "" : `<button class="pdf" type="button" data-pdf="${id}"><span>Muat turun PDF</span><span>ดาวน์โหลด PDF</span></button>`;
+  const lessonIcon = l => { const v = l.blocks.find(b=>b.t==="vocab"); const w = v && v.rows.find(r=>G[r[0]] && !/^\d$/.test(G[r[0]])); return w ? G[w[0]] : (l.blocks.find(b=>b.t==="reading") && GB[l.blocks.find(b=>b.t==="reading").title]) || ""; };
+  const unitEmos = {1:"👋 🔢 ✋ 🔤",2:"👨‍👩‍👧 🏫 🎨 🏥",3:"⏰ 🍳 🍛 😊",4:"🌙 🍢 🗣️ 🦌"};
 
   B.units.forEach(u=>{
     out.push(`<section class="sheet unitsheet" id="unit${u.no}">
       <div class="big">${u.no}</div>
       ${bi("Unit "+u.no,"หน่วยที่ "+u.no)}
       <h2 style="margin-top:12px">${bi(u.ms,u.th,"span")}</h2>
+      <div class="emos">${emo(unitEmos[u.no]||"")}</div>
       <div style="margin-top:22px">${bi(lessonsByUnit(u).length+" pelajaran · "+u.jam+" jam","จำนวน "+lessonsByUnit(u).length+" บท · "+u.jam+" ชั่วโมง")}</div>
       ${folio("Unit "+u.no)}
     </section>`);
-    lessonsByUnit(u).forEach(l=>{
-      pelNo++; l.no = pelNo;
-      const startPage = page+1; lessonPage[l.id]=startPage;
-      out.push(`<section class="sheet lesson" id="${l.id}">
+  });
+  // susun semula: unit sheet diikuti pelajaran
+  const unitSheets = out.splice(tocIndex+1);
+  let pelNo = 0;
+  B.units.forEach((u,ui)=>{
+    out.push(unitSheets[ui]);
+    lessonsByUnit(u).forEach(l=>{ l.no = ++pelNo; });
+  });
+  // nombor halaman disusun semula selepas ini
+  page = tocPage;
+  const final = out.slice(0, tocIndex+1);
+  B.units.forEach((u,ui)=>{
+    final.push(unitSheets[ui].replace(/<span>\d+<\/span><\/footer>/, `<span>${++page}</span></footer>`));
+    lessonsByUnit(u).forEach((l, li, arr)=>{
+      lessonPage[l.id] = page+1;
+      const idx = B.lessons.indexOf(l), prev = B.lessons[idx-1], next = B.lessons[idx+1];
+      const nav = `<nav>${prev?`<a href="#${prev.id}">← ${prev.no}. ${esc(prev.ms)}</a>`:""}${next?`<a href="#${next.id}">${next.no}. ${esc(next.ms)} →</a>`:`<a href="#glosari">Glosari →</a>`}</nav>`;
+      const ic = lessonIcon(l);
+      final.push(`<section class="sheet lesson" id="${l.id}">
         ${pdfBtn(l.id)}
         <div class="eyebrow"><span>Unit ${u.no} · Pelajaran ${l.no}</span><span class="th">หน่วยที่ ${u.no} · บทที่ ${l.no}</span></div>
-        <div class="ltitle">${bi(l.ms,l.th,"h2")}</div>
+        <div class="ltitle">${bi(l.ms,l.th,"h2")}${ic?emo(ic):""}</div>
         <div class="sec"><div class="box"><div class="label">${bi("Objektif pembelajaran","จุดประสงค์การเรียนรู้")}</div>
           <ul>${l.obj.map(o=>`<li>${bi(o[0],o[1])}</li>`).join("")}</ul></div></div>
         <div class="sec">${l.blocks.map(block).join("\n")}</div>
-        <div class="sec">${bi("Latihan","แบบฝึกหัด","h3")}
-          <div class="lat">${l.latihan.map((q,i)=>`<div class="q"><span class="num">${i+1}.</span>${bi(q.q[0],q.q[1])}
-            <div class="items">${q.items.map(it=>bi(it[0],it[1])).join("")}</div></div>`).join("")}</div>
-        </div>
+        <div class="sec"><div class="head">${bi("Latihan","แบบฝึกหัด","h3")}</div>${latihanHTML(l)}</div>
         <div class="box nilai"><div class="label">${bi("Nilai murni","ข้อคิด")}</div><div style="margin-top:8px">${bi(l.nilai[0],l.nilai[1])}</div></div>
-        ${folio("Pelajaran "+l.no+" · "+l.ms)}
+        ${folio("Pelajaran "+l.no+" · "+l.ms, nav)}
       </section>`);
     });
   });
+  out.length = 0; out.push(...final);
 
-  /* glosari */
+  /* ---------- glosari ---------- */
   const gmap = new Map();
   gloss.forEach(([m,t])=>{ if(!/[.?!]$/.test(m) && !m.includes("...")) { const k=m.toLowerCase(); if(!gmap.has(k)) gmap.set(k,[m,t]); }});
   const glist = [...gmap.values()].sort((a,b)=>a[0].localeCompare(b[0],"ms"));
   out.push(`<section class="sheet" id="glosari">
     <div class="ltitle">${bi("Glosari","อภิธานศัพท์","h2")}</div>
-    <div class="sec">${bi(glist.length+" perkataan disusun mengikut abjad.","คำศัพท์ "+glist.length+" คำ เรียงตามลำดับอักษร")}
+    <div class="sec">${bi(glist.length+" perkataan disusun mengikut abjad. Tekan perkataan untuk mendengar sebutan.","คำศัพท์ "+glist.length+" คำ เรียงตามลำดับอักษร กดที่คำเพื่อฟังเสียง")}
       <div class="tbl"><table><thead><tr>${hd("Bahasa Melayu","ภาษามลายู")}${hd("Maksud","ความหมาย")}</tr></thead><tbody>
-      ${glist.map(g=>`<tr><td class="mscell">${esc(g[0])}</td><td class="thcell">${esc(g[1])}</td></tr>`).join("")}</tbody></table></div></div>
+      ${glist.map(g=>`<tr><td class="mscell"><button class="word" type="button" data-say="${esc(g[0])}" lang="ms">${esc(g[0])}</button></td><td class="thcell">${esc(g[1])}</td></tr>`).join("")}</tbody></table></div></div>
     ${folio("Glosari")}
   </section>`);
 
-  /* jawapan */
-  const ansCell = a => {
-    const parts = a.split(" / ");
-    const last = parts[parts.length-1];
-    if(parts.length>1 && isThai(last)) return bi(parts.slice(0,-1).join(" / "), last);
-    return isThai(a) ? `<span class="th">${esc(a)}</span>` : `<span class="ms">${esc(a)}</span>`;
+  /* ---------- jawapan ---------- */
+  const ansOf = q => {
+    if (q.type==="fill") return q.items.map(it=>[...it.ms.matchAll(/\[\[(.*?)\]\]/g)].map(m=>m[1].split("|")[0]).join(" / ")).join(", ");
+    if (q.type==="mcq") return q.items.map(it=>it.opts[[].concat(it.a)[0]]).join(", ");
+    if (q.type==="order") return q.items.map(it=>it.a.join(" ")).join(" · ");
+    return "Contoh: " + (q.model||"");
   };
+  const ansCell = a => `<span class="${isThai(a)?"th":"ms"}">${msx(a)}</span>`;
   out.push(`<section class="sheet" id="jawapan">
     <div class="ltitle">${bi("Jawapan Latihan","เฉลยแบบฝึกหัด","h2")}</div>
     <div class="sec"><div class="tbl"><table><thead><tr>${hd("Pelajaran","บทที่")}${hd("Latihan","ข้อ")}${hd("Jawapan","คำตอบ")}</tr></thead><tbody>
-    ${B.lessons.map(l=>l.jawapan.map((j,i)=>`<tr><td class="n">${i===0?l.no:""}</td><td class="n">${j[0]}</td><td>${ansCell(j[1])}</td></tr>`).join("")).join("")}
+    ${B.lessons.map(l=>(L[l.id]||[]).map((q,i)=>`<tr><td class="n">${i===0?l.no:""}</td><td class="n">${i+1}</td><td>${ansCell(ansOf(q))}</td></tr>`).join("")).join("")}
     </tbody></table></div></div>
     ${folio("Jawapan")}
   </section>`);
 
-  /* rujukan */
+  /* ---------- rujukan ---------- */
   out.push(`<section class="sheet" id="rujukan">
     <div class="ltitle">${bi("Rujukan","บรรณานุกรม","h2")}</div>
     <div class="sec">${bi("Senarai rujukan disusun mengikut gaya APA edisi ke-7.","รายการอ้างอิงเรียงตามรูปแบบ APA ฉบับที่ 7")}
@@ -340,12 +537,13 @@ ul.check li::before{content:"";width:18px;height:18px;margin-top:4px;border:2px 
     ${folio("Rujukan")}
   </section>`);
 
-  /* kandungan */
+  /* ---------- kandungan ---------- */
+  const doneBadge = id => { const s = store.get("bm1-skor-"+id); return s ? `<span class="done">✓ ${esc(s)}</span>` : ""; };
   out[tocIndex] = `<section class="sheet" id="kandungan">
     <div class="ltitle">${bi("Kandungan","สารบัญ","h2")}</div>
     <div class="sec"><ul class="toc">
       ${B.units.map(u=>`<li><h3>${bi("Unit "+u.no+" · "+u.ms,"หน่วยที่ "+u.no+" "+u.th,"span")}</h3><ol>
-        ${lessonsByUnit(u).map(l=>`<li><a href="#${l.id}"><span class="no">${l.no}</span>${bi(l.ms,l.th,"span")}<span class="pg">${lessonPage[l.id]}</span></a></li>`).join("")}
+        ${lessonsByUnit(u).map(l=>`<li><a href="#${l.id}"><span class="no">${l.no}</span>${bi(l.ms,l.th,"span")}<span class="pg">${lessonPage[l.id]}<span id="done-${l.id}">${doneBadge(l.id)}</span></span></a></li>`).join("")}
       </ol></li>`).join("")}
       <li><h3>${bi("Lampiran","ภาคผนวก","span")}</h3><ol>
         <li><a href="#glosari"><span class="no">A</span>${bi("Glosari","อภิธานศัพท์","span")}<span class="pg"></span></a></li>
@@ -358,15 +556,130 @@ ul.check li::before{content:"";width:18px;height:18px;margin-top:4px;border:2px 
 
   document.getElementById("book").innerHTML = out.join("\n");
 
-  /* PDF satu pelajaran (berfungsi di GitHub Pages) */
+  /* ================= SUARA ================= */
+  const TTS = { ok: "speechSynthesis" in window, voice: null, slow: false, cur: null };
+  const suaraEl = document.getElementById("suara");
+  function pickVoice(){
+    if (!TTS.ok) return;
+    const vs = speechSynthesis.getVoices();
+    TTS.voice = vs.find(v=>/^ms([-_]|$)/i.test(v.lang)) || vs.find(v=>/^id([-_]|$)/i.test(v.lang)) || null;
+    let msg;
+    if (!TTS.voice) msg = bi("Peranti ini belum mempunyai suara bahasa Melayu. Pasang suara bahasa Melayu dalam tetapan peranti, atau gunakan Chrome di Android.","อุปกรณ์นี้ยังไม่มีเสียงภาษามลายู ติดตั้งเสียงภาษามลายูในการตั้งค่าอุปกรณ์ หรือเปิดด้วย Chrome บน Android");
+    else if (/^ms/i.test(TTS.voice.lang)) msg = bi("Suara bahasa Melayu sedia digunakan: "+TTS.voice.name+".","พร้อมใช้เสียงภาษามลายู: "+TTS.voice.name);
+    else msg = bi("Peranti ini tiada suara bahasa Melayu, jadi buku menggunakan suara bahasa Indonesia ("+TTS.voice.name+"). Sebutan mungkin sedikit berbeza.","อุปกรณ์นี้ไม่มีเสียงภาษามลายู จึงใช้เสียงภาษาอินโดนีเซีย ("+TTS.voice.name+") แทน การออกเสียงอาจต่างเล็กน้อย");
+    suaraEl.innerHTML = msg;
+  }
+  if (TTS.ok){ pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; setTimeout(pickVoice, 1200); }
+  else suaraEl.innerHTML = bi("Pelayar ini tidak menyokong suara. Cuba Chrome, Edge atau Safari.","เบราว์เซอร์นี้ไม่รองรับเสียง ลองใช้ Chrome, Edge หรือ Safari");
+
+  let audioEl = null;
+  function stopAll(){ if (TTS.ok) speechSynthesis.cancel(); if (audioEl){ audioEl.pause(); audioEl=null; } document.querySelectorAll(".playing").forEach(e=>e.classList.remove("playing")); document.querySelectorAll(".dl.on,.row-say.on").forEach(e=>e.classList.remove("on")); }
+  function speak(text, opt={}){
+    return new Promise(res=>{
+      text = (text||"").trim(); if(!text) return res();
+      if (AU[text]){ audioEl = new Audio(AU[text]); audioEl.playbackRate = TTS.slow?0.75:1; audioEl.onended = res; audioEl.onerror = res; audioEl.play().catch(res); return; }
+      if (!TTS.ok) return res();
+      const u = new SpeechSynthesisUtterance(text);
+      if (TTS.voice){ u.voice = TTS.voice; u.lang = TTS.voice.lang; } else u.lang = "ms-MY";
+      u.rate = TTS.slow ? 0.6 : 0.9; u.pitch = opt.pitch || 1;
+      u.onend = res; u.onerror = res;
+      speechSynthesis.speak(u);
+    });
+  }
+  async function playSeq(container){
+    stopAll();
+    const rows = [...container.querySelectorAll("[data-line]")];
+    const whos = [...new Set(rows.map(r=>r.dataset.who).filter(Boolean))];
+    const token = {}; TTS.cur = token;
+    for (const r of rows){
+      if (TTS.cur !== token) return;
+      r.classList.add("on"); r.scrollIntoView({block:"nearest",behavior:"smooth"});
+      const pitch = r.dataset.who ? [1,1.25,0.85][whos.indexOf(r.dataset.who)%3] : 1;
+      await speak(r.dataset.line, {pitch});
+      r.classList.remove("on");
+      await new Promise(z=>setTimeout(z,250));
+    }
+  }
+
+  const lajuBtn = document.getElementById("laju");
+  lajuBtn.addEventListener("click", ()=>{ TTS.slow = !TTS.slow; lajuBtn.setAttribute("aria-pressed", String(TTS.slow)); store.set("bm1-laju", TTS.slow?"1":"0"); });
+  if (store.get("bm1-laju")==="1"){ TTS.slow = true; lajuBtn.setAttribute("aria-pressed","true"); }
+
+  /* ================= LATIHAN ================= */
+  const norm = s => String(s).toLowerCase().normalize("NFKC").replace(/[“”"']/g,"").replace(/[.?!,;:]+$/g,"").replace(/\s+/g," ").trim();
+  const sameAns = (val, alts) => alts.some(a=>norm(a)===norm(val) || norm(a).replace(/[.?!,]/g,"")===norm(val).replace(/[.?!,]/g,""));
+  function checkLesson(id, reveal){
+    const box = document.querySelector(`.lat[data-lesson="${id}"]`);
+    let total=0, right=0;
+    box.querySelectorAll("input.blank").forEach(inp=>{
+      const alts = JSON.parse(inp.dataset.ans); total++;
+      if (reveal && !sameAns(inp.value, alts)) inp.value = alts[0];
+      const ok = sameAns(inp.value, alts); if (ok) right++;
+      inp.classList.toggle("ok", ok); inp.classList.toggle("bad", !ok);
+    });
+    box.querySelectorAll(".mcq").forEach(it=>{
+      const a = JSON.parse(it.dataset.a); total++;
+      const opts = [...it.querySelectorAll(".opt")];
+      if (reveal){ opts.forEach(o=>o.setAttribute("aria-pressed", String(a.includes(+o.dataset.i) && o===opts[a[0]]))); }
+      const sel = opts.find(o=>o.getAttribute("aria-pressed")==="true");
+      opts.forEach(o=>o.classList.remove("ok","bad"));
+      if (sel){ const ok = a.includes(+sel.dataset.i); sel.classList.add(ok?"ok":"bad"); if(ok) right++; else opts[a[0]].classList.add("ok"); }
+    });
+    box.querySelectorAll(".order").forEach(o=>{
+      const a = JSON.parse(o.dataset.a); total++;
+      const built = o.querySelector(".built"), tray = o.querySelector(".tray");
+      if (reveal){ [...built.children].forEach(c=>tray.appendChild(c)); a.forEach(w=>{ const c=[...tray.children].find(x=>x.textContent===w); if(c) built.appendChild(c); }); }
+      const got = [...built.children].map(c=>c.textContent);
+      const ok = got.length===a.length && got.every((w,i)=>w===a[i]); if (ok) right++;
+      built.classList.toggle("ok", ok); built.classList.toggle("bad", !ok);
+    });
+    const sc = document.getElementById("score-"+id);
+    if (reveal){ box.dataset.revealed = "1"; sc.textContent = ""; return; }
+    sc.textContent = `Markah · คะแนน ${right}/${total}`;
+    if (box.dataset.revealed) return;
+    const prev = store.get("bm1-skor-"+id); const prevN = prev ? +prev.split("/")[0] : -1;
+    if (right > prevN){ store.set("bm1-skor-"+id, right+"/"+total); const d=document.getElementById("done-"+id); if(d) d.innerHTML = `<span class="done">✓ ${right}/${total}</span>`; }
+  }
+  function resetLesson(id){
+    const box = document.querySelector(`.lat[data-lesson="${id}"]`);
+    box.querySelectorAll("input.blank").forEach(i=>{ i.value=""; i.classList.remove("ok","bad"); });
+    box.querySelectorAll(".opt").forEach(o=>{ o.setAttribute("aria-pressed","false"); o.classList.remove("ok","bad"); });
+    box.querySelectorAll(".order").forEach(o=>{ const t=o.querySelector(".tray"), b=o.querySelector(".built"); [...b.children].forEach(c=>t.appendChild(c)); b.classList.remove("ok","bad"); });
+    document.getElementById("score-"+id).textContent = "";
+    delete box.dataset.revealed;
+  }
+
+  /* ================= KLIK ================= */
   document.addEventListener("click", e=>{
-    const btn = e.target.closest("[data-pdf]"); if(!btn) return;
-    const sheet = document.getElementById(btn.dataset.pdf);
-    document.body.classList.add("print-one"); sheet.classList.add("print-target");
-    const t = document.title; document.title = "BM1-Pelajaran-" + btn.dataset.pdf.slice(1);
-    window.print();
-    setTimeout(()=>{ document.body.classList.remove("print-one"); sheet.classList.remove("print-target"); document.title = t; }, 500);
+    const t = e.target;
+    const say = t.closest("[data-say]");
+    if (say){ e.stopPropagation(); stopAll(); TTS.cur = null; if (say.classList.contains("say")) say.classList.add("playing"); speak(say.dataset.say).then(()=>say.classList.remove("playing")); return; }
+    const row = t.closest("[data-say-row]");
+    if (row){ row.classList.toggle("show"); stopAll(); speak(row.dataset.sayRow); return; }
+    const all = t.closest("[data-playall]");
+    if (all){ playSeq(document.getElementById(all.dataset.playall)); return; }
+    const hide = t.closest("[data-hide]");
+    if (hide){ const c=document.getElementById(hide.dataset.hide); const on=!c.classList.contains("hide-th"); c.classList.toggle("hide-th", on); c.querySelectorAll(".show").forEach(x=>x.classList.remove("show")); hide.setAttribute("aria-pressed", String(on)); hide.querySelector("span").textContent = on ? "Tunjuk maksud · แสดงความหมาย" : "Sembunyi maksud · ซ่อนความหมาย"; return; }
+    const opt = t.closest(".opt");
+    if (opt){ opt.parentElement.querySelectorAll(".opt").forEach(o=>{ o.setAttribute("aria-pressed","false"); o.classList.remove("ok","bad"); }); opt.setAttribute("aria-pressed","true"); return; }
+    const chip = t.closest(".chip");
+    if (chip){ const o = chip.closest(".order"); const dest = chip.parentElement.classList.contains("tray") ? o.querySelector(".built") : o.querySelector(".tray"); dest.appendChild(chip); o.querySelector(".built").classList.remove("ok","bad"); return; }
+    const ck = t.closest("[data-check]"); if (ck){ checkLesson(ck.dataset.check, false); return; }
+    const sh = t.closest("[data-show]"); if (sh){ checkLesson(sh.dataset.show, true); return; }
+    const rs = t.closest("[data-reset]"); if (rs){ resetLesson(rs.dataset.reset); return; }
+    const pdf = t.closest("[data-pdf]");
+    if (pdf){
+      const sheet = document.getElementById(pdf.dataset.pdf);
+      document.body.classList.add("print-one"); sheet.classList.add("print-target");
+      const tt = document.title; document.title = "BM1-Pelajaran-" + pdf.dataset.pdf.slice(1);
+      window.print();
+      setTimeout(()=>{ document.body.classList.remove("print-one"); sheet.classList.remove("print-target"); document.title = tt; }, 500);
+    }
   });
+  document.addEventListener("keydown", e=>{
+    if ((e.key==="Enter"||e.key===" ") && e.target.matches("[data-say-row]")) { e.preventDefault(); e.target.click(); }
+  });
+  document.querySelectorAll("[data-say-row]").forEach(el=>{ el.tabIndex = 0; el.setAttribute("role","button"); });
 })();
 </script>
 
